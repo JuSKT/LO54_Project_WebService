@@ -1,4 +1,4 @@
-package com.lo54project.webservice;
+package com.lo54project.webservice.object;
 
 public class Location {
 	
