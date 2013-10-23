@@ -16,7 +16,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lo54project.webservice.object.Client;
+import com.lo54project.webservice.model.Client;
 
 @Path("/clientservice")
 public class ClientService {
@@ -56,18 +56,18 @@ public class ClientService {
       
     	ObjectMapper mapper = new ObjectMapper();
       
-//    	try {
-//			// convert user object to json string, and save to a file
-//			mapper.writeValue(new File("c:\\client.json"), c);
-//			// display to console
-//			System.out.println(mapper.writeValueAsString(c));
-//		} catch (JsonGenerationException e) {
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+    	try {
+			// convert user object to json string, and save to a file
+			mapper.writeValue(new File("c:\\client.json"), c);
+			// display to console
+			System.out.println(mapper.writeValueAsString(c));
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
       String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + mapper.writeValueAsString(c);
       return Response.status(200).entity(result).build();
