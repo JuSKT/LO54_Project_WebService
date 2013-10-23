@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.lo54project.webservice.config.BddConnection;
-import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.Course;
 
-public enum ClientDao {
-	instance;
+public enum CourseDao {
+instance;
 	
-	private Map<Integer, Client> contentProvider = new HashMap<Integer, Client>();
+	private Map<String, Course> contentProvider = new HashMap<String, Course>();
 	
-	private ClientDao(){
+	private CourseDao(){
 		
 		Connection connection = null;
 		try {
@@ -27,15 +27,10 @@ public enum ClientDao {
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Client;" );
 		    
 		    while ( resultat.next() ) {
-		        int id = resultat.getInt( "id" );
-		        String lastname = resultat.getString( "lastname" );
-		        String firstname = resultat.getString( "firstname" );
-		        String address = resultat.getString( "address" );
-		        String phone = resultat.getString( "phone" );
-		        String email = resultat.getString( "email" );
-		        int session_id = resultat.getInt( "session_id" );
+		    	String code = resultat.getString( "code" );
+		        String title = resultat.getString( "title" );
 		        
-		        contentProvider.put(id, new Client(id, lastname, firstname, address, phone, email));
+		        contentProvider.put(code, new Course(code, title));
 		    }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -48,7 +43,7 @@ public enum ClientDao {
 		}
 	}
 	
-	public Map<Integer, Client> getModel(){
+	public Map<String, Course> getModel(){
 		return contentProvider;
 	}
 }

@@ -77,6 +77,14 @@ public class Client {
 		this.email = email;
 	}
 
+	public CourseSession getCrss() {
+		return crss;
+	}
+
+	public void setCrss(CourseSession crss) {
+		this.crss = crss;
+	}
+
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", lastname=" + lastname + ", firstname="

@@ -2,7 +2,11 @@ package com.lo54project.webservice.service;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +24,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.lo54project.webservice.dao.ClientDao;
+import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.CourseSession;
 
 //Will map the resource to the URL clients
 @Path("/clients")
@@ -66,17 +72,21 @@ public class ClientsResource {
 	  @POST
 	  @Produces(MediaType.TEXT_HTML)
 	  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	  public void newClient(@FormParam("id") Integer id,
-	      @FormParam("lastname") String lastname,
-	      @FormParam("firstname") String firstname,
-	      @FormParam("address") String address,
-	      @FormParam("phone") String phone,
-	      @FormParam("email") String email,
-	      @Context HttpServletResponse servletResponse) throws IOException {
-		Client cli = new Client(10, lastname, firstname, address, phone, email);
-	    ClientDao.instance.getModel().put(id, cli);
+	  public void newClient(@FormParam("id") Integer id_session_course,
+			  @FormParam("lastname") String lastname,
+			  @FormParam("firstname") String firstname,
+			  @FormParam("address") String address,
+			  @FormParam("phone") String phone,
+			  @FormParam("email") String email,
+			  @Context HttpServletResponse servletResponse) throws IOException, ParseException, SQLException {
+				  
+		  Client cli = new Client(10, lastname, firstname, address, phone, email);
+		  
+		  cli.setCrss(CourseSessionDao.instance.getSessionCourse(id_session_course));
+		  
+		  ClientDao.instance.getModel().put(10, cli);
 	    
-	    servletResponse.sendRedirect("../participate.html");
+		  servletResponse.sendRedirect("../participate.html");
 	  }
 	  
 	  

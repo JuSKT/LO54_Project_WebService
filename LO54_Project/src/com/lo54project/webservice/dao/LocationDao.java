@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.lo54project.webservice.config.BddConnection;
-import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.Location;
 
-public enum ClientDao {
+public enum LocationDao {
 	instance;
 	
-	private Map<Integer, Client> contentProvider = new HashMap<Integer, Client>();
+	private Map<Integer, Location> contentProvider = new HashMap<Integer, Location>();
 	
-	private ClientDao(){
+	private LocationDao(){
 		
 		Connection connection = null;
 		try {
@@ -24,18 +24,13 @@ public enum ClientDao {
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Client;" );
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Location;" );
 		    
 		    while ( resultat.next() ) {
 		        int id = resultat.getInt( "id" );
-		        String lastname = resultat.getString( "lastname" );
-		        String firstname = resultat.getString( "firstname" );
-		        String address = resultat.getString( "address" );
-		        String phone = resultat.getString( "phone" );
-		        String email = resultat.getString( "email" );
-		        int session_id = resultat.getInt( "session_id" );
+		        String city = resultat.getString( "city" );
 		        
-		        contentProvider.put(id, new Client(id, lastname, firstname, address, phone, email));
+		        contentProvider.put(id, new Location(id, city));
 		    }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -48,7 +43,7 @@ public enum ClientDao {
 		}
 	}
 	
-	public Map<Integer, Client> getModel(){
+	public Map<Integer, Location> getModel(){
 		return contentProvider;
 	}
 }

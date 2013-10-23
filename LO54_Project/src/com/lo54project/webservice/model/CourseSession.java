@@ -46,6 +46,22 @@ public class CourseSession {
 		this.end = end;
 	}
 
+	public Course getCrs() {
+		return crs;
+	}
+
+	public void setCrs(Course crs) {
+		this.crs = crs;
+	}
+
+	public Location getLoc() {
+		return loc;
+	}
+
+	public void setLoc(Location loc) {
+		this.loc = loc;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseSession [id=" + id + ", start=" + start + ", end=" + end
