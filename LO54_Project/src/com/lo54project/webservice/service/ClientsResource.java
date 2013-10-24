@@ -80,11 +80,10 @@ public class ClientsResource {
 			  @FormParam("email") String email,
 			  @Context HttpServletResponse servletResponse) throws IOException, ParseException, SQLException {
 				  
-		  Client cli = new Client(10, lastname, firstname, address, phone, email);
-		  
+		  Client cli = new Client(-1, lastname, firstname, address, phone, email);
 		  cli.setCrss(CourseSessionDao.instance.getSessionCourse(id_session_course));
 		  
-		  ClientDao.instance.getModel().put(10, cli);
+		  ClientDao.instance.createClientAndSetCourseSession(cli);
 	    
 		  servletResponse.sendRedirect("../participate.html");
 	  }

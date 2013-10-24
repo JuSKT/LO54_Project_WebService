@@ -33,7 +33,8 @@ public enum CourseSessionDao {
 		        String start = resultat.getString( "start" );
 		        String end = resultat.getString( "end" );
 		        
-		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+//		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		        
 		        contentProvider.put(id, new CourseSession(id, formatter.parse(start), formatter.parse(end)));
 		    }
@@ -70,7 +71,7 @@ public enum CourseSessionDao {
 		        String start = resultat.getString( "start" );
 		        String end = resultat.getString( "end" );
 		        
-		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		        
 		        cd = new CourseSession(id, formatter.parse(start), formatter.parse(end));
 		    }

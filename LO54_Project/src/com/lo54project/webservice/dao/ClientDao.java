@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.lo54project.webservice.config.BddConnection;
 import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.CourseSession;
 
 public enum ClientDao {
 	instance;
@@ -50,5 +53,27 @@ public enum ClientDao {
 	
 	public Map<Integer, Client> getModel(){
 		return contentProvider;
+	}
+
+	public void createClientAndSetCourseSession(Client cli) {
+		Connection connection = null;
+		try {
+			BddConnection bc = new BddConnection();
+		    connection = bc.getConnection();
+		 
+		    Statement statement = connection.createStatement();
+		    System.out.println("INSERT INTO Client (`lastname` ,`firstname` ,`address` ,`phone` ,`email` ,`session_id`) VALUES ('"+cli.getLastname()+"', '"+cli.getFirstname()+"', '"+cli.getAddress()+"', '"+cli.getPhone()+"', '"+cli.getEmail()+"', '"+cli.getCrss().getId()+"');");
+		    int id = statement.executeUpdate( "INSERT INTO Client (`lastname` ,`firstname` ,`address` ,`phone` ,`email` ,`session_id`) VALUES ('"+cli.getLastname()+"', '"+cli.getFirstname()+"', '"+cli.getAddress()+"', '"+cli.getPhone()+"', '"+cli.getEmail()+"', '"+cli.getCrss().getId()+"');", Statement.RETURN_GENERATED_KEYS);
+		    cli.setId(id);
+		    contentProvider.put(cli.getId(), cli);
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		} finally {
+		    if ( connection != null )
+		        try {
+		            /* Close connection */
+		        	connection.close();
+		        } catch ( SQLException ignore ) {}
+		}
 	}
 }
