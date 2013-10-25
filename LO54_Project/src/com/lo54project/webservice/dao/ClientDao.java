@@ -47,10 +47,6 @@ public enum ClientDao {
 		        } catch ( SQLException ignore ) {}
 		}
 	}
-	
-	public Map<Integer, Client> getModel(){
-		return contentProvider;
-	}
 
 	public void createClientAndSetCourseSession(Client cli) {
 		Connection connection = null;
@@ -59,7 +55,7 @@ public enum ClientDao {
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    System.out.println("INSERT INTO Client (`lastname` ,`firstname` ,`address` ,`phone` ,`email` ,`session_id`) VALUES ('"+cli.getLastname()+"', '"+cli.getFirstname()+"', '"+cli.getAddress()+"', '"+cli.getPhone()+"', '"+cli.getEmail()+"', '"+cli.getCrss().getId()+"');");
+
 		    int id = statement.executeUpdate( "INSERT INTO Client (`lastname` ,`firstname` ,`address` ,`phone` ,`email` ,`session_id`) VALUES ('"+cli.getLastname()+"', '"+cli.getFirstname()+"', '"+cli.getAddress()+"', '"+cli.getPhone()+"', '"+cli.getEmail()+"', '"+cli.getCrss().getId()+"');", Statement.RETURN_GENERATED_KEYS);
 		    cli.setId(id);
 		    contentProvider.put(cli.getId(), cli);
@@ -72,5 +68,9 @@ public enum ClientDao {
 		        	connection.close();
 		        } catch ( SQLException ignore ) {}
 		}
+	}
+	
+	public Map<Integer, Client> getModel(){
+		return contentProvider;
 	}
 }

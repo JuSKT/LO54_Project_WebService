@@ -7,8 +7,7 @@ import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 
 public class DbPoolConnection {
-	// I TEST COMMENTARS LOL !
-	// ME TOO
+
 	private String url = "jdbc:mysql://localhost:3306/lo54_project";
 	private String user = "root";
 	private String pass = "";
@@ -42,8 +41,4 @@ public class DbPoolConnection {
 	public Connection getConnection() throws SQLException{
 		return connectionPool.getConnection();
 	}
-	
-//	public Connection getConnection() throws SQLException{
-//		return DriverManager.getConnection( url, user, pass );
-//	}
 }

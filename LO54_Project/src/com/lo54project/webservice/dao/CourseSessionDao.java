@@ -33,7 +33,6 @@ public enum CourseSessionDao {
 		        String start = resultat.getString( "start" );
 		        String end = resultat.getString( "end" );
 		        
-//		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		        
 		        contentProvider.put(id, new CourseSession(id, formatter.parse(start), formatter.parse(end)));
@@ -49,10 +48,6 @@ public enum CourseSessionDao {
 		        	connection.close();
 		        } catch ( SQLException ignore ) {}
 		}
-	}
-	
-	public Map<Integer, CourseSession> getModel(){
-		return contentProvider;
 	}
 
 	public CourseSession getSessionCourse(Integer id_session_course) throws SQLException, ParseException {
@@ -70,10 +65,17 @@ public enum CourseSessionDao {
 		        int id = resultat.getInt( "id" );
 		        String start = resultat.getString( "start" );
 		        String end = resultat.getString( "end" );
+		        String course_code = resultat.getString( "course_code" );
+		        int location_id = resultat.getInt( "location_id" );
 		        
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		        
 		        cd = new CourseSession(id, formatter.parse(start), formatter.parse(end));
+		        
+		        //GET LOCATION
+		        cd.setLoc(LocationDao.instance.getLocation(location_id));
+		        //GET COURSE
+		        cd.setCrs(CourseDao.instance.getCourse(course_code));
 		    }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -90,4 +92,7 @@ public enum CourseSessionDao {
 		return cd;
 	}
 	
+	public Map<Integer, CourseSession> getModel(){
+		return contentProvider;
+	}
 }

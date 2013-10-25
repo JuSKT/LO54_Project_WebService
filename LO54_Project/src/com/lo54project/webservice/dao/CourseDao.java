@@ -43,6 +43,36 @@ instance;
 		}
 	}
 	
+	public Course getCourse(String course_code) {
+		Connection connection = null;
+		Course c = new Course();
+		try {
+			DbPoolConnection bc = new DbPoolConnection();
+			
+		    connection = bc.getConnection();
+		 
+		    Statement statement = connection.createStatement();
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course WHERE code ="+ course_code );
+		    		    
+		    while ( resultat.next() ) {
+		    	String code = resultat.getString( "code" );
+		        String title = resultat.getString( "title" );
+		        
+		        c = new Course(code, title);
+		    }
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		} finally {
+		    if ( connection != null )
+		        try {
+		            /* Close connection */
+		        	connection.close();
+		        } catch ( SQLException ignore ) {}
+		}
+	    
+		return c;
+	}
+	
 	public Map<String, Course> getModel(){
 		return contentProvider;
 	}
