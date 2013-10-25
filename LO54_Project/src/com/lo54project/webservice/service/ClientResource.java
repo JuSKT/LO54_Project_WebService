@@ -16,7 +16,7 @@ import com.lo54project.webservice.dao.ClientDao;
 import com.lo54project.webservice.model.Client;
 
 public class ClientResource {
-	@Context
+	  @Context
 	  UriInfo uriInfo;
 	  @Context
 	  Request request;
@@ -27,7 +27,7 @@ public class ClientResource {
 	    this.id = Integer.valueOf(id);
 	  }
 	  
-	//Application integration     
+	  //Application integration     
 	  @GET
 	  @Produces({MediaType.APPLICATION_JSON})
 	  public Client getClient() {

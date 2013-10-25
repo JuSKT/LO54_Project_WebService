@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lo54project.webservice.config.BddConnection;
+import com.lo54project.webservice.config.DbPoolConnection;
 import com.lo54project.webservice.model.Client;
 import com.lo54project.webservice.model.CourseSession;
 
@@ -22,7 +22,7 @@ public enum ClientDao {
 		
 		Connection connection = null;
 		try {
-			BddConnection bc = new BddConnection();
+			DbPoolConnection bc = new DbPoolConnection();
 			
 		    connection = bc.getConnection();
 		 
@@ -58,7 +58,7 @@ public enum ClientDao {
 	public void createClientAndSetCourseSession(Client cli) {
 		Connection connection = null;
 		try {
-			BddConnection bc = new BddConnection();
+			DbPoolConnection bc = new DbPoolConnection();
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();

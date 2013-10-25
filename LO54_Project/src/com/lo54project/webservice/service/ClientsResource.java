@@ -45,7 +45,7 @@ public class ClientsResource {
 //	  public List<Client> getClientsBrowser() {
 //	    List<Client> clients = new ArrayList<Client>();
 //	    clients.addAll(ClientDao.instance.getModel().values());
-//	    return clients; 
+//	    return clients;
 //	  }
 	  
 	  // Return the list of clients for applications

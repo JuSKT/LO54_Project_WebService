@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lo54project.webservice.config.BddConnection;
+import com.lo54project.webservice.config.DbPoolConnection;
 import com.lo54project.webservice.model.Course;
 
 public enum CourseDao {
@@ -19,7 +19,7 @@ instance;
 		
 		Connection connection = null;
 		try {
-			BddConnection bc = new BddConnection();
+			DbPoolConnection bc = new DbPoolConnection();
 			
 		    connection = bc.getConnection();
 		 
