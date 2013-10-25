@@ -22,17 +22,16 @@ public class DbPoolConnection {
 			e.printStackTrace();
 		}
 		
-		BoneCPConfig config = new BoneCPConfig();   // création d'un objet BoneCPConfig
-		config.setJdbcUrl( url );           // définition de l'URL JDBC
-		config.setUsername( user );       // définition du nom d'utilisateur
-		config.setPassword( pass );       // définition du mot de passe
+		BoneCPConfig config = new BoneCPConfig();
+		config.setJdbcUrl( url );
+		config.setUsername( user );
+		config.setPassword( pass );
 		     
-		config.setMinConnectionsPerPartition( 5 );  // définition du nombre min de connexions par partition
-		config.setMaxConnectionsPerPartition( 10 ); // définition du nombre max de connexions par partition
-		config.setPartitionCount( 2 );          // définition du nombre de partitions
+		config.setMinConnectionsPerPartition( 5 );
+		config.setMaxConnectionsPerPartition( 10 );
+		config.setPartitionCount( 2 );
 		
 		try {
-			// création du pool à partir de l'objet BoneCPConfig
 			connectionPool = new BoneCP( config );
 		} catch (SQLException e) {
 			e.printStackTrace();
