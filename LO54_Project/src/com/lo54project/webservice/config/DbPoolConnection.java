@@ -1,7 +1,6 @@
 package com.lo54project.webservice.config;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.jolbox.bonecp.BoneCP;
@@ -13,7 +12,7 @@ public class DbPoolConnection {
 	private String user = "root";
 	private String pass = "";
 	
-	BoneCP connectionPool = null;
+	private BoneCP connectionPool = null;
 	
 	public DbPoolConnection(){
 		//Load of driver

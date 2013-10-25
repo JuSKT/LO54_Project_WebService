@@ -4,14 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.lo54project.webservice.config.DbPoolConnection;
 import com.lo54project.webservice.model.Client;
-import com.lo54project.webservice.model.CourseSession;
 
 public enum ClientDao {
 	instance;
@@ -36,7 +33,7 @@ public enum ClientDao {
 		        String address = resultat.getString( "address" );
 		        String phone = resultat.getString( "phone" );
 		        String email = resultat.getString( "email" );
-		        int session_id = resultat.getInt( "session_id" );
+		        //int session_id = resultat.getInt( "session_id" );
 		        
 		        contentProvider.put(id, new Client(id, lastname, firstname, address, phone, email));
 		    }

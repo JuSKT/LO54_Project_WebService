@@ -1,12 +1,9 @@
 package com.lo54project.webservice.service;
 
 import java.io.IOException;
-import java.net.URI;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +17,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.lo54project.webservice.dao.ClientDao;
 import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.Client;
-import com.lo54project.webservice.model.CourseSession;
 
 //Will map the resource to the URL clients
 @Path("/clients")
