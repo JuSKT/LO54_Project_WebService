@@ -33,10 +33,7 @@ public class CourseSessionResource {
 	    return courseSession; 
 	  }
 	  
-	  // Defines that the next path parameter after course sessions is
-	  // treated as a parameter and passed to the ClientResources
-	  // Allows to type http://localhost:8080/de.vogella.jersey.todo/rest/todos/1
-	  // 1 will be treaded as parameter course session and passed to CourseSessionResource
+	  // Return the chosen course session
 	  @GET
 	  @Produces({MediaType.APPLICATION_JSON})
 	  @Path("{coursesession}")
