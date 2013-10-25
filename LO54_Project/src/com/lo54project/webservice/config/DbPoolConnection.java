@@ -7,7 +7,7 @@ import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 
 public class DbPoolConnection {
-	
+	// I TEST COMMENTARS LOL !
 	private String url = "jdbc:mysql://localhost:3306/lo54_project";
 	private String user = "root";
 	private String pass = "";
