@@ -50,7 +50,7 @@ public enum CourseSessionDao {
 		}
 	}
 
-	public CourseSession getSessionCourse(Integer id_session_course) throws SQLException, ParseException {
+	public CourseSession getCourseSession(Integer id_course_session) throws SQLException, ParseException {
 		Connection connection = null;
 		CourseSession cd = new CourseSession();
 		try {
@@ -59,7 +59,7 @@ public enum CourseSessionDao {
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course_session WHERE id ="+ id_session_course );
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course_session WHERE id ="+ id_course_session );
 		    		    
 		    while ( resultat.next() ) {
 		        int id = resultat.getInt( "id" );

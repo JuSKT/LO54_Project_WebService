@@ -76,7 +76,7 @@ public class ClientsResource {
 			  @Context HttpServletResponse servletResponse) throws IOException, ParseException, SQLException {
 				  
 		  Client cli = new Client(-1, lastname, firstname, address, phone, email);
-		  cli.setCrss(CourseSessionDao.instance.getSessionCourse(id_session_course));
+		  cli.setCrss(CourseSessionDao.instance.getCourseSession(id_session_course));
 		  
 		  ClientDao.instance.createClientAndSetCourseSession(cli);
 	    
