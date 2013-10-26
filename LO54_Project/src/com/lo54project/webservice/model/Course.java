@@ -1,5 +1,8 @@
 package com.lo54project.webservice.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Course {
 	
 	private String code;
