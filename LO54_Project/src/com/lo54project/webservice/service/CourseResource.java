@@ -18,7 +18,7 @@ import javax.xml.bind.JAXBElement;
 import com.lo54project.webservice.dao.CourseDao;
 import com.lo54project.webservice.model.Course;
 
-// Will map the resource to the URL courses
+/** Class which will map the resource to the URL courses */
 @Path("/courses")
 public class CourseResource 
 {
@@ -28,7 +28,10 @@ public class CourseResource
 	@Context
 	Request request;
 
-	// Return the list of courses
+	/** Return the list of courses
+	 * 
+	 * @return courses
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<Course> getCourses() 
@@ -38,7 +41,11 @@ public class CourseResource
 	    return courses; 
 	}
 	
-	// Return the chosen course
+	/** Return the chosen course
+	 * 
+	 * @param code
+	 * @return course
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("{course}")
@@ -54,7 +61,10 @@ public class CourseResource
 		return course;
 	}
 	   
-	// Return the number of courses
+	/** Return the number of courses
+	 * 
+	 * @return count
+	 */
 	@GET
 	@Path("count")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +74,11 @@ public class CourseResource
 		return String.valueOf(count);
 	}
 	  
-	// Put a course into response and return it 
+	/** Put a course into response and return it 
+	 * 
+	 * @param course
+	 * @return res
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putCourse(JAXBElement<Course> course) 
@@ -73,7 +87,11 @@ public class CourseResource
 	    return putAndGetResponse(c);
 	}
 	  
-	// Put a client into response and return it
+	/** Put a client into response and return it
+	 * 
+	 * @param c
+	 * @return res
+	 */
 	private Response putAndGetResponse(Course c) 
 	{
 		Response res;
