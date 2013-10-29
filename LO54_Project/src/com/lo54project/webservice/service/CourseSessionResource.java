@@ -18,7 +18,7 @@ import javax.xml.bind.JAXBElement;
 import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.CourseSession;
 
-//Will map the resource to the URL course_sessions
+/** Class which will map the resource to the URL course_sessions */
 @Path("/coursesessions")
 public class CourseSessionResource 
 {
@@ -28,7 +28,10 @@ public class CourseSessionResource
 	@Context
 	Request request;
 	  
-	// Return the list of course_sessions
+	/** Return the list of course_sessions
+	 * 
+	 * @return courseSession
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<CourseSession> getCourseSessions() 
@@ -38,7 +41,11 @@ public class CourseSessionResource
 	    return courseSession; 
 	}
 	  
-	// Return the chosen course_session
+	/** Return the chosen course_session
+	 * 
+	 * @param id
+	 * @return cs
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("{coursesession}")
@@ -54,7 +61,10 @@ public class CourseSessionResource
 		return cs;
 	}
 	
-	// Return the number of course_sessions
+	/** Return the number of course_sessions
+	 * 
+	 * @return count
+	 */
 	@GET
 	@Path("count")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +74,11 @@ public class CourseSessionResource
 		return String.valueOf(count);
 	}
 	
-	// Put a course_session into response and return it 
+	/** Put a course_session into response and return it 
+	 * 
+	 * @param course_session
+	 * @return c
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putCourseSession(JAXBElement<CourseSession> course_session) 
@@ -73,7 +87,11 @@ public class CourseSessionResource
 	    return putAndGetResponse(c);
 	}
 	  
-	// Put a course_session into response and return it
+	/** Put a course_session into response and return it
+	 * 
+	 * @param c
+	 * @return res
+	 */
 	private Response putAndGetResponse(CourseSession c) 
 	{
 		Response res;
