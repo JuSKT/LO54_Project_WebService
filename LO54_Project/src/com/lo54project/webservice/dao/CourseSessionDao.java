@@ -21,9 +21,7 @@ public enum CourseSessionDao {
 		
 		Connection connection = null;
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course_session;" );
@@ -54,9 +52,7 @@ public enum CourseSessionDao {
 		Connection connection = null;
 		CourseSession cd = new CourseSession();
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course_session WHERE id ="+ id_course_session );

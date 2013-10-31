@@ -9,37 +9,38 @@ import com.jolbox.bonecp.BoneCPConfig;
 public class DbPoolConnection {
 
 	//Config  
-	private String url = "jdbc:mysql://localhost:3306/lo54_project";
-	private String user = "root";
-	private String pass = "";
+	private static String url = "jdbc:mysql://localhost:3306/lo54_project";
+	private static String user = "root";
+	private static String pass = "";
 	
-	private BoneCP connectionPool = null;
+	private static BoneCP connectionPool = null;
 	
-	public DbPoolConnection(){
-		//Load of driver
-		try {
-		    Class.forName( "com.mysql.jdbc.Driver" );
-		} catch ( ClassNotFoundException e ) {
-			e.printStackTrace();
+	private DbPoolConnection(){}
+	
+	public static Connection getConnection() throws SQLException{
+		if(connectionPool == null){
+			//Load of driver
+			try {
+			    Class.forName( "com.mysql.jdbc.Driver" );
+			} catch ( ClassNotFoundException e ) {
+				e.printStackTrace();
+			}
+			
+			BoneCPConfig config = new BoneCPConfig();
+			config.setJdbcUrl( url );
+			config.setUsername( user );
+			config.setPassword( pass );
+			     
+			config.setMinConnectionsPerPartition( 5 );
+			config.setMaxConnectionsPerPartition( 10 );
+			config.setPartitionCount( 2 );
+			
+			try {
+				connectionPool = new BoneCP( config );
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		BoneCPConfig config = new BoneCPConfig();
-		config.setJdbcUrl( url );
-		config.setUsername( user );
-		config.setPassword( pass );
-		     
-		config.setMinConnectionsPerPartition( 5 );
-		config.setMaxConnectionsPerPartition( 10 );
-		config.setPartitionCount( 2 );
-		
-		try {
-			connectionPool = new BoneCP( config );
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public Connection getConnection() throws SQLException{
 		return connectionPool.getConnection();
 	}
 }

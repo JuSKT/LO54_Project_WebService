@@ -19,9 +19,7 @@ instance;
 		
 		Connection connection = null;
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course;" );
@@ -47,9 +45,7 @@ instance;
 		Connection connection = null;
 		Course c = new Course();
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course WHERE code = \""+ course_code +"\"");

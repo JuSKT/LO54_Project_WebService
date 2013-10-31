@@ -19,9 +19,7 @@ public enum LocationDao {
 		
 		Connection connection = null;
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Location;" );
@@ -47,9 +45,7 @@ public enum LocationDao {
 		Connection connection = null;
 		Location loc = new Location();
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Loation WHERE id ="+ location_id );

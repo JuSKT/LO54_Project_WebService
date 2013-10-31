@@ -18,10 +18,8 @@ public enum ClientDao {
 	private ClientDao(){
 		
 		Connection connection = null;
-		try {
-			DbPoolConnection bc = new DbPoolConnection();
-			
-		    connection = bc.getConnection();
+		try {			
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Client;" );
@@ -51,8 +49,7 @@ public enum ClientDao {
 	public void createClientAndSetCourseSession(Client cli) {
 		Connection connection = null;
 		try {
-			DbPoolConnection bc = new DbPoolConnection();
-		    connection = bc.getConnection();
+		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
 
