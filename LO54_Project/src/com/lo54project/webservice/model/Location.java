@@ -1,38 +1,73 @@
 package com.lo54project.webservice.model;
 
-public class Location {
-	
+import javax.xml.bind.annotation.XmlRootElement;
+
+/** Class which manage session locations */
+@XmlRootElement
+public class Location 
+{
+	// Properties
 	private int id;
 	private String city;
 	
-	public Location() {
+	/** Default constructor */
+	public Location() 
+	{
 		super();
 	}
 	
-	public Location(int id, String city) {
+	/** Specific constructor
+	 * 
+	 * @param id
+	 * @param city
+	 */
+	public Location(int id, String city) 
+	{
 		super();
 		this.id = id;
 		this.city = city;
 	}
 
-	public int getId() {
+	/** Return location's id
+	 * 
+	 * @return id
+	 */
+	public int getId() 
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	/** Set location's id
+	 * 
+	 * @param id
+	 */
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
-	public String getCity() {
+	/** Return location's name
+	 * 
+	 * @return city
+	 */
+	public String getCity() 
+	{
 		return city;
 	}
 
-	public void setCity(String city) {
+	/** Set location's name
+	 * 
+	 * @param city
+	 */
+	public void setCity(String city) 
+	{
 		this.city = city;
 	}
 
+	/** Redefining the method toString */
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Location [id=" + id + ", city=" + city + "]";
 	}
 

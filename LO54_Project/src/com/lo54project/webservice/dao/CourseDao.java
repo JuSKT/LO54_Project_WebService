@@ -24,7 +24,7 @@ instance;
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Client;" );
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course;" );
 		    
 		    while ( resultat.next() ) {
 		    	String code = resultat.getString( "code" );
@@ -52,13 +52,15 @@ instance;
 		    connection = bc.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course WHERE code ="+ course_code );
-		    		    
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Course WHERE code = \""+ course_code +"\"");
+ 
 		    while ( resultat.next() ) {
+		    	
 		    	String code = resultat.getString( "code" );
 		        String title = resultat.getString( "title" );
 		        
 		        c = new Course(code, title);
+		        
 		    }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
