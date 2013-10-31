@@ -26,7 +26,7 @@ import com.lo54project.webservice.dao.ClientDao;
 import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.Client;
 
-// Will map the resource to the URL clients
+/** Class which will map the resource to the URL clients */
 @Path("/clients")
 public class ClientResource 
 {
@@ -36,7 +36,10 @@ public class ClientResource
 	@Context
 	Request request;
 
-	// Return the list of clients
+	/** Return the list of clients
+	 * 
+	 * @return clients
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<Client> getClients() 
@@ -46,7 +49,11 @@ public class ClientResource
 	    return clients; 
 	}
 	
-	// Return the chosen client
+	/** Return the chosen client
+	 * 
+	 * @param id
+	 * @return cli
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("{client}")
@@ -62,7 +69,10 @@ public class ClientResource
 		return cli;
 	}
 	   
-	// Return the number of clients
+	/** Return the number of clients
+	 * 
+	 * @return count
+	 */
 	@GET
 	@Path("count")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -71,8 +81,12 @@ public class ClientResource
 		int count = ClientDao.instance.getModel().size();
 		return String.valueOf(count);
 	}
-	  
-	// Put a client into response and return it 
+
+	/** Put a client into response and return it 
+	 * 
+	 * @param cli
+	 * @return res
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putClient(JAXBElement<Client> cli) 
@@ -81,7 +95,11 @@ public class ClientResource
 	    return putAndGetResponse(c);
 	}
 	  
-	// Put a client into response and return it
+	/** Put a client into response and return it
+	 * 
+	 * @param cli
+	 * @return res
+	 */
 	private Response putAndGetResponse(Client cli) 
 	{
 		Response res;
@@ -98,8 +116,11 @@ public class ClientResource
 	    ClientDao.instance.getModel().put(cli.getId(), cli);
 	    return res;
 	}
-	
-	// Delete a client via his id
+
+	/** Delete a client via his id
+	 * 
+	 * @param id
+	 */
 	@DELETE
 	public void deleteClient(@PathParam("client") String id) 
 	{
@@ -110,8 +131,20 @@ public class ClientResource
 	    	throw new RuntimeException("Delete: Client with " + id +  " not found");
 	    }
 	}
-	  
-	// Register a new client to a course session
+
+	/** Register a new client to a course session
+	 * 
+	 * @param id_session_course
+	 * @param lastname
+	 * @param firstname
+	 * @param address
+	 * @param phone
+	 * @param email
+	 * @param servletResponse
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws SQLException
+	 */
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

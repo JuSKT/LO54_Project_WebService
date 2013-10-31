@@ -18,7 +18,7 @@ import javax.xml.bind.JAXBElement;
 import com.lo54project.webservice.dao.LocationDao;
 import com.lo54project.webservice.model.Location;
 
-// Will map the resource to the URL locations
+/** Class which will map the resource to the URL locations */
 @Path("/locations")
 public class LocationResource 
 {
@@ -28,7 +28,10 @@ public class LocationResource
 	@Context
 	Request request;
 	  
-	// Return the list of locations
+	/** Return the list of locations
+	 * 
+	 * @return locations
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<Location> getLocations() 
@@ -38,7 +41,11 @@ public class LocationResource
 	    return locations; 
 	}
 	  
-	// Return the chosen location
+	/** Return the chosen location
+	 * 
+	 * @param id
+	 * @return loc
+	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("{location}")
@@ -54,7 +61,10 @@ public class LocationResource
 		return loc;
 	}
 	
-	// Return the number of locations
+	/** Return the number of locations
+	 * 
+	 * @return count
+	 */
 	@GET
 	@Path("count")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +74,11 @@ public class LocationResource
 		return String.valueOf(count);
 	}
 	
-	// Put a location into response and return it 
+	/** Put a location into response and return it 
+	 * 
+	 * @param location
+	 * @return c
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putLocation(JAXBElement<Location> location) 
@@ -73,7 +87,11 @@ public class LocationResource
 	    return putAndGetResponse(c);
 	}
 	  
-	// Put a location into response and return it
+	/** Put a location into response and return it
+	 * 
+	 * @param c
+	 * @return res
+	 */
 	private Response putAndGetResponse(Location c) 
 	{
 		Response res;
