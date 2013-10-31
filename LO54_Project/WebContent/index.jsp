@@ -8,13 +8,15 @@
 <title>LO54 Project</title>
 </head>
 <body>
-	<header>
-		<h1>LO54 Project</h1>
-	</header>
-	<aside id="filter">
-		<jsp:include page="filters.jsp"/>
-	</aside>
-	<section>
-	</section>
+	<div id="content">
+		<header>
+			<h1>LO54 Project</h1>
+		</header>
+		<aside id="filters">
+			<jsp:include page="filters.jsp"/>
+		</aside>
+		<section id="main">
+		</section>
+	</div>
 </body>
 </html>
