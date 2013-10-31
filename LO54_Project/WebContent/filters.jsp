@@ -3,4 +3,4 @@
 <h2>Filters</h2>
 By Word:<input type="text" placeholder="Search"/><br/>
 By date:<input type="text" id="datepicker" placeholder="click"/><br/>
-By Location:
+By Location: 
