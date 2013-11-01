@@ -35,5 +35,4 @@ public class LocationHandler {
 		
 		return locations;
 	}
-	
 }
