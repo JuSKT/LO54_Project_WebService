@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<jsp:include page="head.jsp"/>
-		<title>LO54 Project</title>
+		<title>LO54 Project WebService</title>
 	</head>
 	
 	<body>
