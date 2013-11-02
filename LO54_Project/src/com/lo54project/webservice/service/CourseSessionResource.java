@@ -1,5 +1,7 @@
 package com.lo54project.webservice.service;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -61,6 +63,23 @@ public class CourseSessionResource
 		}
 		
 		return cs;
+	}
+	
+	/** Return the chosen course_session by course_code
+	 * 
+	 * @param course_code
+	 * @return cs
+	 * @throws ParseException 
+	 * @throws SQLException 
+	 */
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("course_code/{coursesession}")
+	public List<CourseSession> getCourseSessionByCourseCode(@PathParam("coursesession") String course_code) throws SQLException, ParseException 
+	{
+		List<CourseSession> courseSession = new ArrayList<CourseSession>();
+		courseSession.addAll(CourseSessionDao.instance.getCourseSessionByCourseCode(course_code).values());
+	    return courseSession;
 	}
 	
 	/** Return the chosen course_session
