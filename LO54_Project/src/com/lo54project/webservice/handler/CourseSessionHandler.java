@@ -12,17 +12,19 @@ import javax.ws.rs.core.UriBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lo54project.webservice.model.Course;
 import com.lo54project.webservice.model.CourseSession;
+import com.lo54project.webservice.model.Location;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class CourseSessionHandler {
-	
-	public List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
-		
+public class CourseSessionHandler 
+{
+	public List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException
+	{
 		List<CourseSession> courseSession = new ArrayList<CourseSession>();
 		
 		ObjectMapper mapper = new ObjectMapper(); 
@@ -33,8 +35,14 @@ public class CourseSessionHandler {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	        
 		JsonNode rootNode = mapper.readTree(service.path("rest").path("coursesessions").accept(MediaType.APPLICATION_JSON).get(String.class));
-		for(JsonNode n : rootNode.path("courseSession")) {
-			courseSession.add(new CourseSession(n.path("id").asInt(), formatter.parse(n.path("start").asText()), formatter.parse(n.path("end").asText())));
+	
+		for(JsonNode n : rootNode.path("courseSession")) 
+		{	
+			CourseSession cs = new CourseSession(n.path("id").asInt(), formatter.parse(n.path("start").asText()), formatter.parse(n.path("end").asText()));
+			cs.setCrs(new Course(n.path("crs").path("code").textValue(), ""));
+			cs.setLoc(new Location(n.path("loc").path("id").asInt(), ""));
+			
+			courseSession.add(cs);
 		}
 		
 		return courseSession;
