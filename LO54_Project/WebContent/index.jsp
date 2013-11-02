@@ -14,7 +14,7 @@
 				<table>
 					<tr>
 						<td>
-							<img src="./static/images/java_logo.png" width="70px"/>
+							<a href="./"><img src="./static/images/java_logo.png" width="70px"/></a>
 						</td>
 						<td>
 							<h1>Find your course</h1>
