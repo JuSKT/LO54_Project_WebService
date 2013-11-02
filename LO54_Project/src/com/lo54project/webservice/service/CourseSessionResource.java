@@ -2,6 +2,8 @@ package com.lo54project.webservice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -48,8 +50,8 @@ public class CourseSessionResource
 	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	@Path("{coursesession}")
-	public CourseSession getCourseSession(@PathParam("coursesession") String id) 
+	@Path("id/{coursesession}")
+	public CourseSession getCourseSessionById(@PathParam("coursesession") String id) 
 	{
 		CourseSession cs = CourseSessionDao.instance.getModel().get(Integer.valueOf(id));
 		
@@ -59,6 +61,26 @@ public class CourseSessionResource
 		}
 		
 		return cs;
+	}
+	
+	/** Return the chosen course_session
+	 * 
+	 * @param location
+	 * @return courseSession
+	 */
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("location/{coursesession}")
+	public List<CourseSession> getCourseSessionByLocation(@PathParam("coursesession") String location) 
+	{
+		List<CourseSession> courseSession = new ArrayList<CourseSession>();
+		for (Entry<Integer, CourseSession> en : CourseSessionDao.instance.getModel().entrySet()) {
+			if(en.getValue().getLoc().getCity().contains(location)){
+				courseSession.add(en.getValue());
+			}
+		}
+		
+		return courseSession;
 	}
 	
 	/** Return the number of course_sessions
