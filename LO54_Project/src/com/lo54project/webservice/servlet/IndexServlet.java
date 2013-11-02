@@ -28,8 +28,7 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LocationHandler lh = new LocationHandler();
-		request.setAttribute("locations", lh.parseLocations());
+		request.setAttribute("locations", LocationHandler.parseLocations());
 		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 

@@ -21,14 +21,14 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class CourseSessionHandler {
 	
-	public List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+	private static ObjectMapper mapper = new ObjectMapper(); 
+	private static ClientConfig cConfig = new DefaultClientConfig();
+	private static com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
+	private static WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
+	
+	public static List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
 		
 		List<CourseSession> courseSession = new ArrayList<CourseSession>();
-		
-		ObjectMapper mapper = new ObjectMapper(); 
-		ClientConfig cConfig = new DefaultClientConfig();
-		com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
-		WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	        
@@ -40,14 +40,9 @@ public class CourseSessionHandler {
 		return courseSession;
 	}
 	
-	public List<CourseSession> parseCourseSessionsByLocation(String location) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+	public static List<CourseSession> parseCourseSessionsByLocation(String location) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
 		
 		List<CourseSession> courseSession = new ArrayList<CourseSession>();
-		
-		ObjectMapper mapper = new ObjectMapper(); 
-		ClientConfig cConfig = new DefaultClientConfig();
-		com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
-		WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	        
