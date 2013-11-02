@@ -17,10 +17,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class LocationHandler {
-
-	public List<Location> parseLocations() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException{
-		
+public class LocationHandler 
+{
+	public List<Location> parseLocations() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException
+	{	
 		List<Location> locations = new ArrayList<Location>();
 		
 		ObjectMapper mapper = new ObjectMapper(); 
@@ -29,7 +29,9 @@ public class LocationHandler {
 		WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
 
 		JsonNode rootNode = mapper.readTree(service.path("rest").path("locations").accept(MediaType.APPLICATION_JSON).get(String.class));
-		for(JsonNode n : rootNode.path("location")) {
+		
+		for(JsonNode n : rootNode.path("location")) 
+		{
 			locations.add(new Location(n.path("id").asInt(), n.path("city").textValue()));
 		}
 		
