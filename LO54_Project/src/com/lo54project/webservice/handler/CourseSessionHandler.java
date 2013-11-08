@@ -34,6 +34,7 @@ public class CourseSessionHandler {
                 
                 JsonNode rootNode = mapper.readTree(service.path("rest").path("coursesessions").accept(MediaType.APPLICATION_JSON).get(String.class));
                 for(JsonNode n : rootNode.path("courseSession")) {
+                	//Need the set
                         courseSession.add(new CourseSession(n.path("id").asInt(), formatter.parse(n.path("start").asText()), formatter.parse(n.path("end").asText())));
                 }
                 

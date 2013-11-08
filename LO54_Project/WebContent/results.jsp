@@ -21,6 +21,10 @@
 	List<Course> courses = (List<Course>)request.getAttribute("courses");
 	List<CourseSession> coursesessions = (List<CourseSession>)request.getAttribute("coursesessions");
 	
+// 	out.println("<br><br> locations" +locations);
+// 	out.println("<br><br> courses" +courses);
+// 	out.println("<br><br> coursesessions" +coursesessions);
+	
 	for(Course c : courses)
 	{
 		out.println("<h3>" + c.getCode() + " - " + c.getTitle() + "</h3>");
@@ -28,14 +32,14 @@
 		
 		for(CourseSession cs : coursesessions)
 		{
-			if(cs.getCrs().getCode().equals(c.getCode()))
-			{				
-				SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy 'at' HH:mm");
-				String start = sdf.format(cs.getStart());
-				String end = sdf.format(cs.getEnd());
+// 			if(cs.getCrs().getCode().equals(c.getCode()))
+// 			{				
+// 				SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy 'at' HH:mm");
+// 				String start = sdf.format(cs.getStart());
+// 				String end = sdf.format(cs.getEnd());
 				
-				out.println("<li>" + start + " to " + end + " in <b>" + locations.get(cs.getLoc().getId()).getCity() + "</b></li>");
-			}
+// 				out.println("<li>" + start + " to " + end + " in <b>" + locations.get(cs.getLoc().getId()).getCity() + "</b></li>");
+// 			}
 		}
 		
 		out.println("</ul></div>");
