@@ -1,13 +1,25 @@
 package com.lo54project.webservice.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /** Class which manage session locations */
 @XmlRootElement
+@Entity
+@Table(name="location")
 public class Location 
 {
 	// Properties
+	@Id
+	@GeneratedValue
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="city")
 	private String city;
 	
 	/** Default constructor */

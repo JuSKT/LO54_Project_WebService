@@ -1,4 +1,4 @@
-package com.lo54project.webservice.config;
+package com.lo54project.webservice.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;

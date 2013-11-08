@@ -2,17 +2,39 @@ package com.lo54project.webservice.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /** Class which manage session courses */
 @XmlRootElement
+@Entity
+@Table(name="course_session")
 public class CourseSession 
 {
 	// Properties
+	@Id
+	@GeneratedValue
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="start")
 	private Date start;
+	
+	@Column(name="end")
 	private Date end;
+	
+	@ManyToOne
+    @JoinColumn(name="course_code")
 	private Course crs;
+	
+	@ManyToOne
+    @JoinColumn(name="location_id")
 	private Location loc;
 	
 	/** Default constructor */

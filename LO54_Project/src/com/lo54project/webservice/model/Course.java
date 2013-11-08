@@ -1,13 +1,24 @@
 package com.lo54project.webservice.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /** Class which manage courses */
 @XmlRootElement
+@Entity
+@Table(name="course")
 public class Course 
 {
 	// Properties
+	@Id
+	@Column(name="code")
 	private String code;
+	
+	@Column(name="title")
 	private String title;
 	
 	/** Default constructor */

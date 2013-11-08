@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lo54project.webservice.config.DbPoolConnection;
 import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.util.DbPoolConnection;
 
 public enum ClientDao {
 	instance;

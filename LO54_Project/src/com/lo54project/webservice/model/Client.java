@@ -1,18 +1,43 @@
 package com.lo54project.webservice.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /** Class which manage clients */
 @XmlRootElement
+@Entity
+@Table(name="client")
 public class Client 
 {
 	// Properties
+	@Id
+	@GeneratedValue
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="lastname")
 	private String lastname;
+	
+	@Column(name="firstname")
 	private String firstname;
+	
+	@Column(name="address")
 	private String address;
+	
+	@Column(name="phone")
 	private String phone;
+	
+	@Column(name="email")
 	private String email;
+	
+	@ManyToOne
+    @JoinColumn(name="session_id")
 	private CourseSession crss;
 	
 	/** Default constructor */
@@ -34,6 +59,24 @@ public class Client
 	{
 		super();
 		this.id = id;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+	}
+	
+	/** Specific constructor 
+	 * 
+	 * @param lastname
+	 * @param firstname
+	 * @param address
+	 * @param phone
+	 * @param email
+	 */
+	public  Client(String lastname, String firstname, String address, String phone, String email) 
+	{
+		super();
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.address = address;
