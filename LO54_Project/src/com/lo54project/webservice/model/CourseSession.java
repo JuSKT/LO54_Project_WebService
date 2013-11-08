@@ -57,6 +57,12 @@ public class CourseSession
 		this.end = end;
 	}
 
+	public CourseSession(Date start, Date end) {
+		super();
+		this.start = start;
+		this.end = end;
+	}
+
 	/** Return course session's id
 	 * 
 	 * @return id

@@ -2,6 +2,7 @@ package com.lo54project.webservice.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,10 @@ import com.lo54project.webservice.handler.CourseHandler;
 import com.lo54project.webservice.handler.CourseSessionHandler;
 import com.lo54project.webservice.handler.LocationHandler;
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
+import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.Course;
+import com.lo54project.webservice.model.CourseSession;
+import com.lo54project.webservice.model.Location;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 
@@ -32,10 +37,6 @@ public class IndexServlet extends HttpServlet
 	/** @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response) */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
 		
 		request.setAttribute("locations", LocationHandler.parseLocations());
 		

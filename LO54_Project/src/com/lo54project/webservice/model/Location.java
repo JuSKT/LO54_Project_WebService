@@ -40,6 +40,11 @@ public class Location
 		this.city = city;
 	}
 
+	public Location(String city) {
+		super();
+		this.city = city;
+	}
+
 	/** Return location's id
 	 * 
 	 * @return id
