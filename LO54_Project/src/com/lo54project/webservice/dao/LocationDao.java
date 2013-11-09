@@ -48,7 +48,7 @@ public enum LocationDao {
 		    connection = DbPoolConnection.getConnection();
 		 
 		    Statement statement = connection.createStatement();
-		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Loation WHERE id ="+ location_id );
+		    ResultSet resultat = statement.executeQuery( "SELECT * FROM Location WHERE id ="+ location_id );
 		    		    
 		    while ( resultat.next() ) {
 		        int id = resultat.getInt( "id" );

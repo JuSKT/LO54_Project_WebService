@@ -41,8 +41,11 @@ public enum CourseSessionDao
 		        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		        
 		        CourseSession cs = new CourseSession(id, formatter.parse(start), formatter.parse(end));
-		        cs.setCrs(new Course(course_code, ""));
-		        cs.setLoc(new Location(location_id, ""));
+		        
+//		        cs.setCrs(new Course(course_code, ""));
+		        cs.setCrs(CourseDao.instance.getCourse(course_code));
+//		        cs.setLoc(new Location(location_id, ""));
+		        cs.setLoc(LocationDao.instance.getLocation(location_id));
 		        
 		        contentProvider.put(id, cs);
 		    }

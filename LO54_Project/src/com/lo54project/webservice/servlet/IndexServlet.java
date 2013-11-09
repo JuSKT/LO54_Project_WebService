@@ -59,7 +59,7 @@ public class IndexServlet extends HttpServlet
 		
 		try 
 		{
-			request.setAttribute("courses", CourseHandler.parseCourse());
+			request.setAttribute("courses", CourseHandler.parseCourses());
 		} 
 		catch (UniformInterfaceException e) 
 		{
