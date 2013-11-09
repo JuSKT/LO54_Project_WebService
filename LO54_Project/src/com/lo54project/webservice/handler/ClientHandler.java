@@ -42,9 +42,9 @@ public class ClientHandler {
             Client client = new Client();
             
             JsonNode rootNode = mapper.readTree(service.path("rest").path("clients").path(id).accept(MediaType.APPLICATION_JSON).get(String.class));
-            for(JsonNode n : rootNode.path("client")) {
-                    client = new Client(n.path("id").asInt(), n.path("lastname").asText(), n.path("firstname").asText(), n.path("address").asText(), n.path("phone").asText(), n.path("email").asText());
-            }
+//            for(JsonNode n : rootNode.path("client")) {
+                    client = new Client(rootNode.path("id").asInt(), rootNode.path("lastname").asText(), rootNode.path("firstname").asText(), rootNode.path("address").asText(), rootNode.path("phone").asText(), rootNode.path("email").asText());
+//            }
             
             return client;
     }
