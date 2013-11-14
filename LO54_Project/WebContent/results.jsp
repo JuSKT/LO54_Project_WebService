@@ -17,9 +17,13 @@
 <div id="accordion">
 
 <%
-	List<Location> locations = (List<Location>)request.getAttribute("locations");
+// 	List<Location> locations = (List<Location>)request.getAttribute("locations");
 	List<Course> courses = (List<Course>)request.getAttribute("courses");
 	List<CourseSession> coursesessions = (List<CourseSession>)request.getAttribute("coursesessions");
+	
+// 	out.println("<br><br> locations" +locations);
+// 	out.println("<br><br> courses" +courses);
+// 	out.println("<br><br> coursesessions" +coursesessions);
 	
 	for(Course c : courses)
 	{
@@ -34,7 +38,7 @@
 				String start = sdf.format(cs.getStart());
 				String end = sdf.format(cs.getEnd());
 				
-				out.println("<li>" + start + " to " + end + " in <b>" + locations.get(cs.getLoc().getId()).getCity() + "</b></li>");
+				out.println("<li>" + start + " to " + end + " in <b>" + cs.getLoc().getCity() + "</b></li>");
 			}
 		}
 		

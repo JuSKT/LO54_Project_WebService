@@ -153,11 +153,17 @@ public class CourseSession
 		this.loc = loc;
 	}
 
-	/** Redefining the method toString */
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "CourseSession [id=" + id + ", start=" + start + ", end=" + end
-				+ "]";
+				+ ", crs=" + crs + ", loc=" + loc + "]";
 	}
+
+//	/** Redefining the method toString */
+//	@Override
+//	public String toString() 
+//	{
+//		return "CourseSession [id=" + id + ", start=" + start + ", end=" + end
+//				+ "]";
+//	}
 }

@@ -25,7 +25,7 @@ public class ClientHandler {
         private static com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
         private static WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
         
-        public static List<Client> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+        public static List<Client> parseClients() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
                 
                 List<Client> client = new ArrayList<Client>();
                 
@@ -36,5 +36,17 @@ public class ClientHandler {
                 
                 return client;
         }
+        
+        public static Client parseClientById(String id) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+            
+            Client client = new Client();
+            
+            JsonNode rootNode = mapper.readTree(service.path("rest").path("clients").path(id).accept(MediaType.APPLICATION_JSON).get(String.class));
+//            for(JsonNode n : rootNode.path("client")) {
+                    client = new Client(rootNode.path("id").asInt(), rootNode.path("lastname").asText(), rootNode.path("firstname").asText(), rootNode.path("address").asText(), rootNode.path("phone").asText(), rootNode.path("email").asText());
+//            }
+            
+            return client;
+    }
 
 }

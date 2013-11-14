@@ -35,4 +35,16 @@ public class LocationHandler {
                 
                 return locations;
         }
+        
+        public static Location parseLocationById(String id) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException{
+            
+            Location location = new Location();
+
+            JsonNode rootNode = mapper.readTree(service.path("rest").path("locations").path(id).accept(MediaType.APPLICATION_JSON).get(String.class));
+//            for(JsonNode n : rootNode.path("location")) {
+                    location = new Location(rootNode.path("id").asInt(), rootNode.path("city").textValue());
+//            }
+            
+            return location;
+    }
 }
