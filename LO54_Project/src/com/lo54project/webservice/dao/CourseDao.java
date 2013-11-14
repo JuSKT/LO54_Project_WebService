@@ -23,6 +23,7 @@ instance;
 	
 	private Map<String, Course> contentProvider = new HashMap<String, Course>();
 	
+	@SuppressWarnings("unchecked")
 	private CourseDao(){
 		
 //		Connection connection = null;
@@ -52,7 +53,7 @@ instance;
         Session session = sf.openSession();
 
         List<Course> courses = new ArrayList<Course>();
-        courses = session.createCriteria(Course.class).list();//session.createQuery("from Client").list();
+        courses = session.createCriteria(Course.class).list();
         
         for (Course c : courses) {
         	contentProvider.put(c.getCode(), c);

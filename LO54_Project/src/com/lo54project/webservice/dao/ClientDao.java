@@ -62,7 +62,7 @@ public enum ClientDao {
         Session session = sf.openSession();
 
         List<Client> clients = new ArrayList<Client>();
-        clients = session.createCriteria(Client.class).list();//session.createQuery("from Client").list();
+        clients = session.createCriteria(Client.class).list();
         
         for (Client c : clients) {
         	contentProvider.put(c.getId(), c);
