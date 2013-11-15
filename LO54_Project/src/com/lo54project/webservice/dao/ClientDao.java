@@ -22,7 +22,7 @@ import com.lo54project.webservice.model.CourseSession;
 import com.lo54project.webservice.model.Location;
 import com.lo54project.webservice.util.DbPoolConnection;
 
-public enum ClientDao {
+public enum ClientDao implements ClientDaoInterface {
 	instance;
 	
 	private Map<Integer, Client> contentProvider = new HashMap<Integer, Client>();
