@@ -65,6 +65,23 @@ public class CourseSessionResource
 		return cs;
 	}
 	
+	/** Return the list of course_sessions limited
+	 * 
+	 * @param lMin, lMax
+	 * @return courseSession
+	 * @throws ParseException 
+	 * @throws SQLException 
+	 */
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("limit/{lMin}/{lMax}")
+	public List<CourseSession> getCourseSessionsWithLimit(@PathParam("lMin") String lMin,@PathParam("lMax") String lMax) throws SQLException, ParseException 
+	{
+		List<CourseSession> courseSession = new ArrayList<CourseSession>();
+	    courseSession.addAll(CourseSessionDao.instance.getCourseSessionsWithLimit(lMin, lMax).values());
+	    return courseSession; 
+	}
+	
 	/** Return the chosen course_session by course_code
 	 * 
 	 * @param course_code
