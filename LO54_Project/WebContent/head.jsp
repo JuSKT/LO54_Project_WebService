@@ -6,6 +6,10 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="./static/js/jquery.cookie.js"></script>
 <script>
+
+
+///////// Jquery for design ///////////////
+
 	// Instanciation of the datepicker
 	$(function() 
 	{
@@ -18,34 +22,10 @@
 		$( "#accordion" ).accordion();
 	});
 	
-	$(function() 
-	{
-		$.cookie.json = true;
-		$(".coursesessions").click(function(){
-			
-			var courseSessionList = new Array();
-			
-			if($(this).is(':checked')){
-				
-				if($.cookie('courseSessionsList')){
-					courseSessionList = JSON.parse($.cookie('courseSessionsList'));
-				}
-				
-				courseSessionList.push($(this).val());
-				
-			}else{
-				
-				courseSessionList = JSON.parse($.cookie('courseSessionsList'));
-				var index = courseSessionList.indexOf($(this).val());
-				if (index > -1) {
-					courseSessionList.splice(index, 1);
-				}
-			}
-			
-			$.cookie('courseSessionsList',JSON.stringify(courseSessionList));
-		});
-	});
-	
+///////// End Jquery for design ////////////
+
+///////// Jquery for Filter ///////////////
+
 	// Filter results by words
 	$(function() 
 	{
@@ -76,6 +56,41 @@
 		// getJson
 		// parse and display
 	};
+
+///////// End Jquery for Filter ///////////////
+
+///////// Jquery for the choice and registration for the courseSessions ///////////////
+
+	//gestion of de courseSessions coockie
+	$(function() 
+	{
+		$.cookie.json = true;
+		$(".coursesessions").click(function(){
+			
+			var courseSessionList = new Array();
+			
+			if($(this).is(':checked')){
+				
+				if($.cookie('courseSessionsList')){
+					courseSessionList = JSON.parse($.cookie('courseSessionsList'));
+				}
+				
+				courseSessionList.push($(this).val());
+				
+			}else{
+				
+				courseSessionList = JSON.parse($.cookie('courseSessionsList'));
+				var index = courseSessionList.indexOf($(this).val());
+				if (index > -1) {
+					courseSessionList.splice(index, 1);
+				}
+			}
+			
+			$.cookie('courseSessionsList',JSON.stringify(courseSessionList));
+		});
+	});
+	
+	
 	
 	function checkIfRefresh(){
 		$(".coursesessions").each(function(){
@@ -109,5 +124,6 @@
 		checkIfRefresh();
 	});
 	
+///////// End Jquery for the choice and registration for the courseSessions ///////////////
 
 </script>

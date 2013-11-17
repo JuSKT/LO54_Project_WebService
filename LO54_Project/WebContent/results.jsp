@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div style="padding-left:10px;padding-top:5px;">
-	<span>After checked all the courses you want, go the register form: </span>
+	<span>After checked all the courses go to the register form: </span>
 	<input type="button" id="goToForm" value="Register here" />
-	<span>or If you prefer unchecked everything</span>
-	<input type="button" id="unCheckAll" value="Uncheck all here" />
+	<span>or if you prefer unchecked everything</span>
+	<input type="button" id="unCheckAll" value="Uncheck all here" />.
 </div>
 <div id="accordion">
 	<c:forEach var="course" items="${requestScope.courses}">
