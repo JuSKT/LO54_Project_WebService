@@ -72,7 +72,7 @@
 
 ///////// Jquery for the choice and registration for the courseSessions ///////////////
 
-	//gestion of de courseSessions coockie
+	//gestion of the courseSessions coockie
 	$(function() 
 	{
 		$.cookie.json = true;
@@ -102,7 +102,7 @@
 	});
 	
 	
-	
+	// rechecked everyThing if the page is refresh
 	function checkIfRefresh(){
 		$(".coursesessions").each(function(){
 			if($.cookie('courseSessionsList')){
@@ -113,15 +113,17 @@
 				}
 			}
 		});
-	}
+	};
 	
+	// unchecked evrything
 	function emptyCheck(){
 		$.removeCookie('courseSessionsList');
 		$(".coursesessions").each(function(){
 			$(this).prop('checked', false);
 		});
-	}
+	};
 	
+	//action on click of uncheck all button 
 	$(function() 
 	{
 		$("#unCheckAll").click(function(){
@@ -130,9 +132,26 @@
 	});
 	
 	
+	// call checkifRefresh after loading the page
 	$(function() 
 	{
 		checkIfRefresh();
+	});
+	
+	$(function()
+	{
+		$("#goToForm").click(function(){
+			 $( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
+			$.get( "./registerForm", function( data ) {
+				  $( "#sub-content" ).html( data );
+				});
+		});	
+	});
+	
+	$(function(){
+		$("#returnFromRegister").click(function(){
+			
+		});
 	});
 	
 ///////// End Jquery for the choice and registration for the courseSessions ///////////////

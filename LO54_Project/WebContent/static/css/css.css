@@ -24,12 +24,13 @@ h1
 
 #sub-content
 {
+	text-align:center;
 	background:white;
 	border-radius: 10px;
 	margin-top:-10px;
 }
 
-#filters
+#top-aside
 {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;

@@ -23,7 +23,7 @@
 				</table>	
 			</header>
 			<div id="sub-content">
-				<aside id="filters">
+				<aside id="top-aside">
 					<jsp:include page="filters.jsp"/>
 				</aside>
 				<section id="main">
