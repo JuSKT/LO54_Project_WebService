@@ -51,6 +51,17 @@
 		});
 	});
 	
+	
+	// detection bottom page
+	$(function(){
+		$(window).scroll(function() {
+
+			if ($(this).height() + $(this).scrollTop() == $(document).height()) {
+                alert('Scrolled to Page Bottom');
+            }
+		});
+	});
+	
 	function filterCourseSessions(){
 		// ask web service 
 		// getJson
