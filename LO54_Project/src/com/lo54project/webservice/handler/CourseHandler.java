@@ -18,12 +18,8 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class CourseHandler {
+public class CourseHandler extends Handler {
         
-        private static ObjectMapper mapper = new ObjectMapper(); 
-        private static ClientConfig cConfig = new DefaultClientConfig();
-        private static com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
-        private static WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
         
         public static List<Course> parseCourses() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
                 

@@ -40,6 +40,26 @@ public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		doProcess(request, response, "index");
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response, "subContent");
+	}
+	
+	
+	/**
+	 * @see HttpServlet#doProcess(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doProcess(HttpServletRequest request,HttpServletResponse response,String forwardTo) 
+			throws ServletException, IOException {
 		request.setAttribute("locations", LocationHandler.parseLocations());
 
 		try {
@@ -63,16 +83,9 @@ public class IndexServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		getServletContext().getRequestDispatcher("/index.jsp").forward(request,
-				response);
-	}
+		getServletContext().getRequestDispatcher("/"+forwardTo+".jsp").forward(request,response);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
+	
+	
 }

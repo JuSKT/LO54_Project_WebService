@@ -7,7 +7,7 @@
 <script src="./static/js/jquery.cookie.js"></script>
 <script>
 
-
+function global(){
 ///////// Jquery for design ///////////////
 
 	// Instanciation of the datepicker
@@ -138,21 +138,36 @@
 		checkIfRefresh();
 	});
 	
+	
+	//dowload the form page
 	$(function()
 	{
 		$("#goToForm").click(function(){
-			 $( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
+			$( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
 			$.get( "./registerForm", function( data ) {
-				  $( "#sub-content" ).html( data );
-				});
+				$( "#sub-content" ).html( data );
+				global();
+			});
 		});	
 	});
 	
-	$(function(){
-		$("#returnFromRegister").click(function(){
-			
+	
+	//add click event to the return button
+	$(function()
+	{
+		$("#returnToIndex").click(function(){
+			$( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
+			$.post("./",function(data){
+				$("#sub-content").html(data);
+				global();
+			});
 		});
 	});
+}
+
+$(function(){
+	global();
+});
 	
 ///////// End Jquery for the choice and registration for the courseSessions ///////////////
 
