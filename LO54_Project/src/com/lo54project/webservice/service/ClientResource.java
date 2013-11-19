@@ -68,6 +68,7 @@ public class ClientResource
 		
 		return cli;
 	}
+	
 	   
 	/** Return the number of clients
 	 * 
@@ -148,19 +149,20 @@ public class ClientResource
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void newClient(@FormParam("id") Integer id_session_course,
-						  @FormParam("lastname") String lastname,
-		  				  @FormParam("firstname") String firstname,
-		  				  @FormParam("address") String address,
+	public String newClient(@FormParam("id") List<String> ids,
+						  @FormParam("ln") String lastname,
+		  				  @FormParam("fn") String firstname,
+		  				  @FormParam("addr") String address,
 		  				  @FormParam("phone") String phone,
 		  				  @FormParam("email") String email,
 		  				  @Context HttpServletResponse servletResponse) throws IOException, ParseException, SQLException 
 	{			  
-		Client cli = new Client(-1, lastname, firstname, address, phone, email);
-		cli.setCrss(CourseSessionDao.instance.getCourseSession(id_session_course));
-		  
-		ClientDao.instance.createClientAndSetCourseSession(cli);
-    
-		servletResponse.sendRedirect("../participate.html");
+		
+		for(String id : ids){
+			Client cli = new Client(-1, lastname, firstname, address, phone, email);
+			cli.setCrss(CourseSessionDao.instance.getCourseSession(Integer.parseInt(id)));
+			ClientDao.instance.createClientAndSetCourseSession(cli);
+    	}
+		return "true";
 	}
 }

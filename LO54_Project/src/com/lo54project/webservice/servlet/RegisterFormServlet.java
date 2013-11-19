@@ -29,7 +29,6 @@ public class RegisterFormServlet extends HttpServlet {
      */
     public RegisterFormServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

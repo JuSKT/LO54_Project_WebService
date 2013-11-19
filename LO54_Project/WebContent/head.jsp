@@ -163,6 +163,31 @@ function global(){
 			});
 		});
 	});
+	
+	
+	//send the form
+	$(function()
+	{
+		$("#registerForm").submit(function(){
+			var form = $(this).serialize();
+			var courseSessionList = JSON.parse($.cookie('courseSessionsList'));
+			for(var c in courseSessionList){
+				form+="&id="+courseSessionList[c];
+			}
+			$.post("./rest/clients",form,function(data){
+				if(data=="true"){
+					emptyCheck();
+					$("#returnToIndex").click();
+				}
+					
+			}).fail(function(){
+				alert("Problem on Server, Can you try again, please ?");
+			});
+			return false;
+		});
+	});
+	
+	
 }
 
 $(function(){

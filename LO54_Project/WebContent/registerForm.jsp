@@ -21,7 +21,7 @@
 		</ul>
 	</div>
 	<div>
-		<form action="./register" method="Post">
+		<form action="./register" method="post" id="registerForm">
 			Firstname:<input type="text" name="fn" /><br/>
 			Lastname:<input type="text" name="ln" /><br/>
 			Address:<input type="text" name="addr" /><br/>
