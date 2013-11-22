@@ -3,5 +3,13 @@
 	<jsp:include page="filters.jsp"/>
 </aside>
 <section id="main">
-	<jsp:include page="results.jsp"/>
+	<div style="padding-left:10px;padding-top:5px;">
+		<span>After checked all the courses go to the register form: </span>
+		<input type="button" id="goToForm" value="Register here" />
+		<span>or if you prefer unchecked everything</span>
+		<input type="button" id="unCheckAll" value="Uncheck all here" />.
+	</div>
+	<div id="accordion">
+		<jsp:include page="results.jsp"/>
+	</div>
 </section>
