@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,7 +32,8 @@ public class CourseSessionHandler extends Handler {
                 
                 List<CourseSession> courseSession = new ArrayList<CourseSession>();
 
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                
                 
                 JsonNode rootNode = mapper.readTree(service.path("rest").path("coursesessions").accept(MediaType.APPLICATION_JSON).get(String.class));
                 for(JsonNode n : rootNode.path("courseSession")) {
@@ -53,7 +55,7 @@ public class CourseSessionHandler extends Handler {
                 
                 List<CourseSession> courseSession = new ArrayList<CourseSession>();
 
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 
                 JsonNode rootNode = mapper.readTree(service.path("rest").path("coursesessions").path("location").path(location).accept(MediaType.APPLICATION_JSON).get(String.class));
                 for(JsonNode n : rootNode.path("courseSession")) {

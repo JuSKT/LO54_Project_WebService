@@ -142,12 +142,25 @@ function global(){
 	//dowload the form page
 	$(function()
 	{
+		var courseSessionList = new Array();
 		$("#goToForm").click(function(){
-			$( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
-			$.get( "./registerForm", function( data ) {
-				$( "#sub-content" ).html( data );
-				global();
-			});
+			
+			if($.cookie('courseSessionsList')){
+				courseSessionList = JSON.parse($.cookie('courseSessionsList'));
+			}
+			
+			if(courseSessionList.length>0){
+				
+				$( "#sub-content" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
+				$.get( "./registerForm", function( data ) {
+					$( "#sub-content" ).html( data );
+					global();
+				});
+				
+			}else{
+				alert("Can You check something before sending the file");
+			}
+			
 		});	
 	});
 	
@@ -169,20 +182,30 @@ function global(){
 	$(function()
 	{
 		$("#registerForm").submit(function(){
-			var form = $(this).serialize();
-			var courseSessionList = JSON.parse($.cookie('courseSessionsList'));
-			for(var c in courseSessionList){
-				form+="&id="+courseSessionList[c];
+			if($.cookie('courseSessionsList')){
+				courseSessionList = JSON.parse($.cookie('courseSessionsList'));
 			}
-			$.post("./rest/clients",form,function(data){
-				if(data=="true"){
-					emptyCheck();
-					$("#returnToIndex").click();
+			
+			if(courseSessionList.length>0){
+
+				var form = $(this).serialize();
+				var courseSessionList = JSON.parse($.cookie('courseSessionsList'));
+				for(var c in courseSessionList){
+					form+="&id="+courseSessionList[c];
 				}
-					
-			}).fail(function(){
-				alert("Problem on Server, Can you try again, please ?");
-			});
+				$.post("./rest/clients",form,function(data){
+					if(data=="true"){
+						emptyCheck();
+						$("#returnToIndex").click();
+					}
+						
+				}).fail(function(){
+					alert("Problem on Server, Can you try again, please ?");
+				});
+			
+			}else{
+				alert("Can You check something before sending the form.");
+			}
 			return false;
 		});
 	});

@@ -1,5 +1,6 @@
 package com.lo54project.webservice.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,11 +29,11 @@ public class CourseSession {
 	@Column(name = "id", unique = true, nullable = false, length = 11)
 	private int id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start", nullable = false)
 	private Date start;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "end", nullable = false)
 	private Date end;
 
