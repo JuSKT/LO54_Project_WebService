@@ -2,9 +2,7 @@ package com.lo54project.webservice.dao;
 
 import java.util.Map;
 
-import com.lo54project.webservice.model.Client;
-
-public interface ClientDaoInterface {
+public interface DaoInterface {
 	
 	public Map<?, ?> getModel();
 	public <T> void create(T o);
