@@ -33,11 +33,11 @@ public class CourseSession {
 	@Column(name = "end", nullable = false)
 	private Date end;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_code", nullable = false)
 	private Course crs;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id", nullable = false)
 	private Location loc;
 

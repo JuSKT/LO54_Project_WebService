@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.FetchType;
+import javax.persistence.criteria.Order;
+
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -77,7 +81,7 @@ public enum CourseSessionDao {
 		Session session = sf.openSession();
 
 		List<CourseSession> coursesessions = new ArrayList<CourseSession>();
-		coursesessions = session.createCriteria(CourseSession.class).list();
+		coursesessions = session.createCriteria(CourseSession.class).setFetchMode("crs", FetchMode.JOIN).setFetchMode("loc", FetchMode.JOIN).list();
 
 		for (CourseSession cs : coursesessions) {
 			contentProvider.put(cs.getId(), cs);
