@@ -106,4 +106,25 @@ public enum ClientDao implements ClientDaoInterface {
 	public Map<Integer, Client> getModel(){
 		return contentProvider;
 	}
+
+	@Override
+	public <T> void create(T o) {
+		Client c = new Client();
+		c = (Client) o;
+		
+	}
+
+	@Override
+	public <T> void remove(T o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T> void update(T o) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
