@@ -14,10 +14,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /** Class which manage session courses */
 @XmlRootElement
 @Entity
 @Table(name = "course_session")
+//@JsonRootName(value = "courseSession")
 public class CourseSession {
 	// Properties
 	@Id
@@ -44,6 +47,15 @@ public class CourseSession {
 	/** Default constructor */
 	public CourseSession() {
 		super();
+	}
+
+	public CourseSession(int id, Date start, Date end, Course crs, Location loc) {
+		super();
+		this.id = id;
+		this.start = start;
+		this.end = end;
+		this.crs = crs;
+		this.loc = loc;
 	}
 
 	/**

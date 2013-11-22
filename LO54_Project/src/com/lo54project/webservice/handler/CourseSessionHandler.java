@@ -9,7 +9,11 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lo54project.webservice.model.Course;
@@ -21,14 +25,9 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class CourseSessionHandler {
+public class CourseSessionHandler extends Handler {
         
-        private static ObjectMapper mapper = new ObjectMapper(); 
-        private static ClientConfig cConfig = new DefaultClientConfig();
-        private static com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create(cConfig);
-        private static WebResource service = client.resource(UriBuilder.fromUri("http://localhost:8080/LO54_Project").build());
-        
-        public static List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+		public static List<CourseSession> parseCourseSessions() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
                 
                 List<CourseSession> courseSession = new ArrayList<CourseSession>();
 
@@ -65,6 +64,15 @@ public class CourseSessionHandler {
                 }
                 
                 return courseSession;
+        }
+        
+        public static List<CourseSession> parseCourseSessionsById(int[] ids) throws JsonParseException, JsonMappingException, UniformInterfaceException, ClientHandlerException, IOException{
+        	
+        	List<CourseSession> courseSessions=new ArrayList<CourseSession>();
+        	for(int i : ids){
+        		courseSessions.add( mapper.readValue(service.path("rest").path("coursesessions").path("id").path(i+"").accept(MediaType.APPLICATION_JSON).get(String.class), CourseSession.class));
+        	}
+        	return courseSessions;
         }
 
 }

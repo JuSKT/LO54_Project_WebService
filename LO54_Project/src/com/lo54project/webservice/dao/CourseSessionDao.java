@@ -17,6 +17,7 @@ import javax.persistence.criteria.Order;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
@@ -141,6 +142,31 @@ public enum CourseSessionDao {
 
 		return cd;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<Integer, CourseSession> getCourseSessionsWithLimit(String lMin, String lMax) 
+			throws SQLException, ParseException {
+		
+		contentProvider.clear();
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+
+        List<CourseSession> coursesessions = new ArrayList<CourseSession>();
+        coursesessions = session.createCriteria(CourseSession.class)
+        				.addOrder(Order.asc("crs"))
+        				.setFirstResult(Integer.parseInt(lMin))
+        				.setMaxResults(Integer.parseInt(lMax))
+        				.list();
+
+        for (CourseSession cs : coursesessions) {
+        	contentProvider.put(cs.getId(), cs);
+		}
+        
+        session.close();
+
+		return contentProvider;
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public Map<Integer, CourseSession> getCourseSessionByCourseCode(
