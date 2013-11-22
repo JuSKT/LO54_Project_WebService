@@ -35,7 +35,7 @@ public enum ClientDao implements DaoInterface {
         Session session = sf.openSession();
         session.beginTransaction();
         
-        session.persist(cli);
+        session.persist(cli); //pas besoin de .save(), hibernate le fait dans le getId
         contentProvider.put(cli.getId(), cli);
         
         session.getTransaction().commit();

@@ -37,6 +37,13 @@ public class CourseSession {
 	@Column(name = "end", nullable = false)
 	private Date end;
 
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "course_code", nullable = false)
+	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="course_code", 
+//                insertable=false, updatable=false, 
+//                nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_code", nullable = false)
 	private Course crs;

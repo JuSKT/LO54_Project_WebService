@@ -1,10 +1,19 @@
 package com.lo54project.webservice.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.IndexColumn;
 
 /** Class which manage courses */
 @XmlRootElement
@@ -18,6 +27,12 @@ public class Course {
 
 	@Column(name = "title", nullable = false, length = 45)
 	private String title;
+	
+	
+//	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
+//  @JoinColumn(name="course_code")
+//	@OneToMany(mappedBy="crs")
+//	private List<CourseSession> courseSessions;
 
 	/** Default constructor */
 	public Course() {
@@ -71,6 +86,25 @@ public class Course {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	
+	/**
+	 * Get courseSessions
+	 * 
+	 * @return courseSessions
+	 */
+//	public List<CourseSession> getCourseSessions() {
+//		return courseSessions;
+//	}
+
+	/**
+	 * Set list of courseSessions
+	 * 
+	 * @param courseSessions
+	 */
+//	public void setCourseSessions(List<CourseSession> courseSessions) {
+//		this.courseSessions = courseSessions;
+//	}
 
 	/** Redefining the method toString */
 	@Override
