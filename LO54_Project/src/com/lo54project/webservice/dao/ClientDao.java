@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Client;
+import com.lo54project.webservice.model.CourseSession;
 
 public enum ClientDao implements DaoInterface {
 	instance;
@@ -25,12 +26,14 @@ public enum ClientDao implements DaoInterface {
         List<Client> clients = new ArrayList<Client>();
         clients = session.createCriteria(Client.class).setFetchMode("crss", FetchMode.JOIN).list();
         
+        clients.toString();
+        
         for (Client c : clients) {
 //        	session.merge(c);
         	contentProvider.put(c.getId(), c);
 		}
         
-//        session.close();
+        session.close();
 	}
 
 	public void createClientAndSetCourseSession(Client cli) {

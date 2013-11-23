@@ -14,6 +14,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
+import com.lo54project.webservice.model.Course;
 import com.lo54project.webservice.model.CourseSession;
 
 public enum CourseSessionDao implements DaoInterface {

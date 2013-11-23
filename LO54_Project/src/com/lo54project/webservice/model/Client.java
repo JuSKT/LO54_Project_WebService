@@ -1,6 +1,7 @@
 package com.lo54project.webservice.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /** Class which manage clients */
@@ -36,7 +38,7 @@ public class Client {
         @Column(name = "email", nullable = false, length = 45)
         private String email;
 
-        @ManyToOne(fetch = FetchType.EAGER)
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "session_id", nullable = false)
         private CourseSession crss;
 

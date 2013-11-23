@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,9 +30,6 @@ public class Course {
 	@Column(name = "title", nullable = false, length = 45)
 	private String title;
 	
-//	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
-//  @JoinColumn(name="course_code")
-//	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="crs")
 	private List<CourseSession> courseSessions;
 
