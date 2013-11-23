@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -21,7 +22,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @XmlRootElement
 @Entity
 @Table(name = "course_session")
-//@JsonRootName(value = "courseSession")
 public class CourseSession {
 	// Properties
 	@Id
@@ -41,7 +41,7 @@ public class CourseSession {
 //	@JoinColumn(name = "course_code", nullable = false)
 	
 //	@ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name="course_code", 
+//  @JoinColumn(name="course_code", 
 //                insertable=false, updatable=false, 
 //                nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -181,12 +181,4 @@ public class CourseSession {
 		return "CourseSession [id=" + id + ", start=" + start + ", end=" + end
 				+ ", crs=" + crs + ", loc=" + loc + "]";
 	}
-
-	// /** Redefining the method toString */
-	// @Override
-	// public String toString()
-	// {
-	// return "CourseSession [id=" + id + ", start=" + start + ", end=" + end
-	// + "]";
-	// }
 }

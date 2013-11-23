@@ -2,7 +2,9 @@ package com.lo54project.webservice.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -65,6 +67,20 @@ public class IndexServlet extends HttpServlet {
 		try {
 			request.setAttribute("coursesessions",
 					CourseSessionHandler.parseCourseSessions());
+			
+			//Example -----------------------------------------------------------------------------
+			List<CourseSession> listCourseSessions = CourseSessionHandler.parseCourseSessions();
+			List<Course> listCourse = new ArrayList<Course>();
+			for (CourseSession crss : listCourseSessions) {
+				crss.getCrs().getCourseSessions().add(crss);
+			}
+			for (CourseSession courseSession : listCourseSessions) {
+				if(!listCourse.contains(courseSession.getCrs())){
+					listCourse.add(courseSession.getCrs());
+				}
+			}
+			//Example -----------------------------------------------------------------------------
+			
 		} catch (UniformInterfaceException e1) {
 			e1.printStackTrace();
 		} catch (ClientHandlerException e1) {

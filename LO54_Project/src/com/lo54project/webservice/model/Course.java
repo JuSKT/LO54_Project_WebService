@@ -1,5 +1,6 @@
 package com.lo54project.webservice.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,11 +29,11 @@ public class Course {
 	@Column(name = "title", nullable = false, length = 45)
 	private String title;
 	
-	
 //	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
 //  @JoinColumn(name="course_code")
-//	@OneToMany(mappedBy="crs")
-//	private List<CourseSession> courseSessions;
+//	@XmlTransient
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="crs")
+	private List<CourseSession> courseSessions;
 
 	/** Default constructor */
 	public Course() {
@@ -49,6 +50,7 @@ public class Course {
 		super();
 		this.code = code;
 		this.title = title;
+		this.courseSessions = new ArrayList<>();
 	}
 
 	/**
@@ -93,18 +95,19 @@ public class Course {
 	 * 
 	 * @return courseSessions
 	 */
-//	public List<CourseSession> getCourseSessions() {
-//		return courseSessions;
-//	}
+	@XmlTransient
+	public List<CourseSession> getCourseSessions() {
+		return courseSessions;
+	}
 
 	/**
 	 * Set list of courseSessions
 	 * 
 	 * @param courseSessions
 	 */
-//	public void setCourseSessions(List<CourseSession> courseSessions) {
-//		this.courseSessions = courseSessions;
-//	}
+	public void setCourseSessions(List<CourseSession> courseSessions) {
+		this.courseSessions = courseSessions;
+	}
 
 	/** Redefining the method toString */
 	@Override

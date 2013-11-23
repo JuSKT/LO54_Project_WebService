@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Client;
 
@@ -21,13 +23,14 @@ public enum ClientDao implements DaoInterface {
         Session session = sf.openSession();
 
         List<Client> clients = new ArrayList<Client>();
-        clients = session.createCriteria(Client.class).list();
+        clients = session.createCriteria(Client.class).setFetchMode("crss", FetchMode.JOIN).list();
         
         for (Client c : clients) {
+//        	session.merge(c);
         	contentProvider.put(c.getId(), c);
 		}
         
-        session.close();
+//        session.close();
 	}
 
 	public void createClientAndSetCourseSession(Client cli) {
