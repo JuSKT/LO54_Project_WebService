@@ -47,12 +47,12 @@ public class CourseSession {
 //  @JoinColumn(name="course_code", 
 //                insertable=false, updatable=false, 
 //                nullable=false)
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "course_code", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
 	private Course crs;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "location_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
 	private Location loc;
 
 	/** Default constructor */

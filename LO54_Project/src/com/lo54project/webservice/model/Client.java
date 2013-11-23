@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 /** Class which manage clients */
 @XmlRootElement
 @Entity
@@ -38,8 +41,8 @@ public class Client {
         @Column(name = "email", nullable = false, length = 45)
         private String email;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "session_id", nullable = false)
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "session_id", referencedColumnName = "id", nullable = false)
         private CourseSession crss;
 
         /** Default constructor */

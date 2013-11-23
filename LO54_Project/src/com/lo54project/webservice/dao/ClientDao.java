@@ -24,9 +24,9 @@ public enum ClientDao implements DaoInterface {
         Session session = sf.openSession();
 
         List<Client> clients = new ArrayList<Client>();
-        clients = session.createCriteria(Client.class).setFetchMode("crss", FetchMode.JOIN).list();
+        clients = session.createCriteria(Client.class).setFetchMode("session_id", FetchMode.JOIN).list();
         
-        clients.toString();
+//        clients.toString();
         
         for (Client c : clients) {
 //        	session.merge(c);

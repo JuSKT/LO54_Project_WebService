@@ -28,7 +28,10 @@ public enum CourseSessionDao implements DaoInterface {
 		Session session = sf.openSession();
 
 		List<CourseSession> coursesessions = new ArrayList<CourseSession>();
-		coursesessions = session.createCriteria(CourseSession.class).setFetchMode("crs", FetchMode.JOIN).setFetchMode("loc", FetchMode.JOIN).list();
+		coursesessions = session.createCriteria(CourseSession.class)
+				.setFetchMode("crs", FetchMode.JOIN)
+				.setFetchMode("loc", FetchMode.JOIN)
+				.list();
 
 		for (CourseSession cs : coursesessions) {
 			contentProvider.put(cs.getId(), cs);
@@ -43,8 +46,7 @@ public enum CourseSessionDao implements DaoInterface {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 
-		cd = (CourseSession) session
-				.get(CourseSession.class, id_course_session);
+		cd = (CourseSession) session.get(CourseSession.class, id_course_session);
 
 		session.close();
 
@@ -60,6 +62,8 @@ public enum CourseSessionDao implements DaoInterface {
 
         List<CourseSession> coursesessions = new ArrayList<CourseSession>();
         coursesessions = session.createCriteria(CourseSession.class)
+        				.setFetchMode("crs", FetchMode.JOIN)
+        				.setFetchMode("loc", FetchMode.JOIN)
         				.addOrder(Order.asc("crs"))
         				.setFirstResult(Integer.parseInt(lMin))
         				.setMaxResults(Integer.parseInt(lMax))
@@ -83,7 +87,11 @@ public enum CourseSessionDao implements DaoInterface {
         Session session = sf.openSession();
 
         List<CourseSession> coursesessions = new ArrayList<CourseSession>();
-        coursesessions = session.createCriteria(CourseSession.class).add(Restrictions.eq("course_code", course_code)).list();
+        coursesessions = session.createCriteria(CourseSession.class)
+        		.add(Restrictions.eq("course_code", course_code))
+        		.setFetchMode("crs", FetchMode.JOIN)
+        		.setFetchMode("loc", FetchMode.JOIN)
+        		.list();
         
         for (CourseSession cs : coursesessions) {
         	contentProvider.put(cs.getId(), cs);
