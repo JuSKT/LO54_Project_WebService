@@ -3,6 +3,7 @@ package com.lo54project.webservice.dao;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,8 +82,7 @@ public enum CourseSessionDao implements DaoInterface {
 
 	@SuppressWarnings("unchecked")
 	public Map<Integer, CourseSession> getCourseSessionByCourseCode(
-			String course_code) throws SQLException, ParseException {
-		Map<Integer, CourseSession> sessions = new HashMap<Integer, CourseSession>();		
+			String course_code) throws SQLException, ParseException {		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
 
@@ -94,6 +94,36 @@ public enum CourseSessionDao implements DaoInterface {
         		.list();
         
         for (CourseSession cs : coursesessions) {
+        	contentProvider.put(cs.getId(), cs);
+		}
+        
+        session.close();
+
+        return contentProvider;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<Integer, CourseSession> getCourseSessionFiltered(String nom, Date date, String location)
+			throws SQLException, ParseException {
+		
+		Map<Integer, CourseSession> sessions = new HashMap<Integer, CourseSession>();		
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+
+        List<CourseSession> coursesessions = new ArrayList<CourseSession>();
+
+        coursesessions =  session.createCriteria(CourseSession.class)
+        		.setFetchMode("crs", FetchMode.JOIN)
+        		.setFetchMode("loc", FetchMode.JOIN)
+				.add(Restrictions.eq("start", date))
+				.add(Restrictions.eq("location_id", location))
+				.add(Restrictions.eq("crs.title", nom))
+				.setMaxResults(15)
+				.list();
+
+		session.close();
+
+		for (CourseSession cs : coursesessions) {
         	contentProvider.put(cs.getId(), cs);
 		}
         
