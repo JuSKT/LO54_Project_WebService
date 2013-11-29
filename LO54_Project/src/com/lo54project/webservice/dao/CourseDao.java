@@ -38,6 +38,11 @@ instance;
         
 		c = (Course) session.get(Course.class, course_code);
 		
+//		par criteria : 
+//			session.createCriteria(Course.class)
+//			.add(Restrictions.idEq(course_code))
+//			.uniqueResult();
+		
 		session.close();
 		
 		return c;
