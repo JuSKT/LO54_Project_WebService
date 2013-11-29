@@ -46,7 +46,13 @@ public enum CourseSessionDao implements DaoInterface {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 
-		cd = (CourseSession) session.get(CourseSession.class, id_course_session);
+//		cd = (CourseSession) session.get(CourseSession.class, id_course_session);
+		
+		cd = (CourseSession) session.createCriteria(CourseSession.class)
+				.add(Restrictions.idEq(id_course_session))
+				.setFetchMode("crs", FetchMode.JOIN)
+				.setFetchMode("loc", FetchMode.JOIN)
+				.uniqueResult();
 
 		session.close();
 
@@ -88,9 +94,9 @@ public enum CourseSessionDao implements DaoInterface {
 
         List<CourseSession> coursesessions = new ArrayList<CourseSession>();
         coursesessions = session.createCriteria(CourseSession.class)
-        		.add(Restrictions.eq("course_code", course_code))
         		.setFetchMode("crs", FetchMode.JOIN)
         		.setFetchMode("loc", FetchMode.JOIN)
+        		.add(Restrictions.eq("crs.code", course_code))
         		.list();
         
         for (CourseSession cs : coursesessions) {
