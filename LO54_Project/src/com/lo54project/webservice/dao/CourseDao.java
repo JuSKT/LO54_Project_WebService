@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Course;
 
@@ -36,7 +38,11 @@ instance;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         
-		c = (Course) session.get(Course.class, course_code);
+//		c = (Course) session.get(Course.class, course_code);
+		
+		c = (Course) session.createCriteria(Course.class)
+				.add(Restrictions.idEq(course_code))
+				.uniqueResult();
 		
 		session.close();
 		

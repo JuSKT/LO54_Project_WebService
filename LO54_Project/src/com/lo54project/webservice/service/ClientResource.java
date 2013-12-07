@@ -161,7 +161,8 @@ public class ClientResource
 		for(String id : ids){
 			Client cli = new Client(-1, lastname, firstname, address, phone, email);
 			cli.setCrss(CourseSessionDao.instance.getCourseSession(Integer.parseInt(id)));
-			ClientDao.instance.createClientAndSetCourseSession(cli);
+//			ClientDao.instance.createClientAndSetCourseSession(cli);
+			ClientDao.instance.create(cli);
     	}
 		return "true";
 	}
