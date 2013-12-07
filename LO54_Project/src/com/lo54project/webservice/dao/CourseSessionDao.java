@@ -101,7 +101,7 @@ public enum CourseSessionDao implements DaoInterface {
         		.list();
         
         for (CourseSession cs : coursesessions) {
-        	sessions.put(cs.getId(), cs);
+        	contentProvider.put(cs.getId(), cs);
 		}
         
         session.close();
