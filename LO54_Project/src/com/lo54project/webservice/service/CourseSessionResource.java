@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -98,6 +101,31 @@ public class CourseSessionResource
 		courseSession.addAll(CourseSessionDao.instance.getCourseSessionByCourseCode(course_code).values());
 	    return courseSession;
 	}
+	
+	/** Return the list of course_sessions filtred
+	 */
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("filtre/{name}/{date}/{location}")
+	public List<CourseSession> getCourseSessionFiltered(@PathParam("name") String name, @PathParam("date") String date ,@PathParam("location") String location) throws SQLException, ParseException 
+	{
+		List<CourseSession> courseSession = new ArrayList<CourseSession>();
+	    courseSession.addAll(CourseSessionDao.instance.getCourseSessionFiltered(name, date, location).values());
+	    return courseSession; 
+	}
+	
+	/** Return the list of course_sessions filtred
+	 */
+	@POST
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public List<CourseSession> getCourseSessionFilteredV2(@FormParam("name") String name, @FormParam("date") String date ,@FormParam("location") String location, @Context HttpServletResponse servletResponse) throws SQLException, ParseException 
+	{
+		List<CourseSession> courseSession = new ArrayList<CourseSession>();
+	    courseSession.addAll(CourseSessionDao.instance.getCourseSessionFiltered(name, date, location).values());
+	    return courseSession; 
+	}
+	
 	
 	/** Return the chosen course_session
 	 * 

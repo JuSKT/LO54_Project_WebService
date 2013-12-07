@@ -2,6 +2,7 @@ package com.lo54project.webservice.dao;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -103,33 +104,43 @@ public enum CourseSessionDao implements DaoInterface {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Map<Integer, CourseSession> getCourseSessionFiltered(String nom, Date date, String location)
+	public Map<Integer, CourseSession> getCourseSessionFiltered(String name, String date, String location)
 			throws SQLException, ParseException {
 		
-		Map<Integer, CourseSession> sessions = new HashMap<Integer, CourseSession>();		
+		contentProvider.clear();
 		SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
 
-        List<CourseSession> coursesessions = new ArrayList<CourseSession>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	    SimpleDateFormat formatterBdd = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = null;
+        
+        try {
+       	 
+    	newDate = formatter.parse(date);  
+    	formatterBdd.format(newDate);    	
+    	} catch (ParseException e) {
+    		e.printStackTrace();
+    	}
 
-        coursesessions =  session.createCriteria(CourseSession.class)
+        List<CourseSession> coursesessions = new ArrayList<CourseSession>();
+        coursesessions = session.createCriteria(CourseSession.class)
+        		.add(Restrictions.eq("crs.code", name))
+        		.add(Restrictions.eq("start", newDate))
+        		.add(Restrictions.eq("loc.id", Integer.parseInt(location)))
         		.setFetchMode("crs", FetchMode.JOIN)
-        		.setFetchMode("loc", FetchMode.JOIN)
-				.add(Restrictions.eq("start", date))
-				.add(Restrictions.eq("location_id", location))
-				.add(Restrictions.eq("crs.title", nom))
+        		.setFetchMode("loc", FetchMode.JOIN)				
 				.setMaxResults(15)
 				.list();
-
-		session.close();
 
 		for (CourseSession cs : coursesessions) {
         	contentProvider.put(cs.getId(), cs);
 		}
+		
         
         session.close();
 
-		return sessions;
+		return contentProvider;
 	}
 
 	public Map<Integer, CourseSession> getModel() {
