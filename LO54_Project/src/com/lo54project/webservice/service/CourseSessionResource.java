@@ -106,7 +106,7 @@ public class CourseSessionResource
 	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	@Path("filtre/{name}/{date}/{location}")
+	@Path("filter/{name}/{date}/{location}")
 	public List<CourseSession> getCourseSessionFiltered(@PathParam("name") String name, @PathParam("date") String date ,@PathParam("location") String location) throws SQLException, ParseException 
 	{
 		List<CourseSession> courseSession = new ArrayList<CourseSession>();
@@ -117,8 +117,9 @@ public class CourseSessionResource
 	/** Return the list of course_sessions filtred
 	 */
 	@POST
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/filter")
 	public List<CourseSession> getCourseSessionFilteredV2(@FormParam("name") String name, @FormParam("date") String date ,@FormParam("location") String location, @Context HttpServletResponse servletResponse) throws SQLException, ParseException 
 	{
 		List<CourseSession> courseSession = new ArrayList<CourseSession>();

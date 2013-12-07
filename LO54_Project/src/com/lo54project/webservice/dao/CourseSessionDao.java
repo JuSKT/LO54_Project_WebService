@@ -117,7 +117,7 @@ public enum CourseSessionDao implements DaoInterface {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	    SimpleDateFormat formatterBdd = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = null;
         

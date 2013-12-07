@@ -30,7 +30,7 @@ function global(){
 	$(function() 
 	{
 		$("#filterByWords").keyup(function(){
-			alert($(this).val());
+			filterCourseSessions();
 		});
 	});
 	
@@ -38,7 +38,7 @@ function global(){
 	$(function() 
 	{
 		$("#filterByDate").change(function(){
-			alert($(this).val());
+			filterCourseSessions();
 		});
 	});
 	
@@ -47,7 +47,7 @@ function global(){
 	$(function() 
 	{
 		$("#filterByLocation").change(function(){
-			alert($(this).val());
+			filterCourseSessions();
 		});
 	});
 	
@@ -57,15 +57,19 @@ function global(){
 		$(window).scroll(function() {
 
 			if ($(this).height() + $(this).scrollTop() == $(document).height()) {
-                alert('Scrolled to Page Bottom');
+               // alert('Scrolled to Page Bottom');
             }
 		});
 	});
 	
 	function filterCourseSessions(){
-		// ask web service 
-		// getJson
-		// parse and display
+		var form = $("#filtersForm").serialize();
+		alert($("#filtersForm").attr("action")+"  "+form)
+		$.post($("#filtersForm").attr("action"),form,function(data){			
+				alert(data);
+		}).fail(function(){
+			alert("Problem on Server, Can you,please, try again ?");
+		});
 	};
 
 ///////// End Jquery for Filter ///////////////
@@ -200,7 +204,7 @@ function global(){
 					}
 						
 				}).fail(function(){
-					alert("Problem on Server, Can you try again, please ?");
+					alert("Problem on Server, Can you, please, try again ?");
 				});
 			
 			}else{
