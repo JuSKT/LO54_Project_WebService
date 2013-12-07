@@ -119,8 +119,7 @@ public enum CourseSessionDao implements DaoInterface {
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	    SimpleDateFormat formatterBdd = new SimpleDateFormat("yyyy-MM-dd");
-        Date newDate = null;
-        
+        Date newDate = null;       
         try {
        	 
     	newDate = formatter.parse(date);  
