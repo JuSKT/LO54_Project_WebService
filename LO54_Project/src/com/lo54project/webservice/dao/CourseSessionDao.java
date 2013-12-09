@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -119,32 +120,35 @@ public enum CourseSessionDao implements DaoInterface {
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	    SimpleDateFormat formatterBdd = new SimpleDateFormat("yyyy-MM-dd");
-        Date newDate = null;       
-        try {
-       	 
-    	newDate = formatter.parse(date);  
-    	formatterBdd.format(newDate);    	
-    	} catch (ParseException e) {
-    		e.printStackTrace();
-    	}
-
-        List<CourseSession> coursesessions = new ArrayList<CourseSession>();
-        coursesessions = session.createCriteria(CourseSession.class)
-        		.add(Restrictions.eq("crs.code", name))
-        		.add(Restrictions.eq("start", newDate))
-        		.add(Restrictions.eq("loc.id", Integer.parseInt(location)))
+        Date newDate = null;    
+        if(!date.equals("")){
+        	try {       	 
+        		newDate = formatter.parse(date);  
+        		formatterBdd.format(newDate);    	
+        	} catch (ParseException e) {
+        		e.printStackTrace();
+        	}
+        }
+   
+        Criteria criteria = session.createCriteria(CourseSession.class)
         		.setFetchMode("crs", FetchMode.JOIN)
-        		.setFetchMode("loc", FetchMode.JOIN)				
-				.setMaxResults(15)
-				.list();
-
+        		.setFetchMode("loc", FetchMode.JOIN);   
+        if(!name.equals("")){
+        	criteria.add(Restrictions.eq("crs.code", name));
+        }
+        if(newDate != null){
+        	criteria.add(Restrictions.eq("start", newDate));
+        }
+        if(!location.equals("0")){
+        	criteria.add(Restrictions.eq("loc.id", Integer.parseInt(location)));
+        }      
+        List<CourseSession> coursesessions = criteria.list();
+             
 		for (CourseSession cs : coursesessions) {
         	contentProvider.put(cs.getId(), cs);
-		}
-		
-        
+		}        
+		criteria.setMaxResults(15);
         session.close();
-
 		return contentProvider;
 	}
 
