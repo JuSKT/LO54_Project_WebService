@@ -129,18 +129,20 @@ public enum CourseSessionDao implements DaoInterface {
         		e.printStackTrace();
         	}
         }
-   
+        
         Criteria criteria = session.createCriteria(CourseSession.class)
         		.setFetchMode("crs", FetchMode.JOIN)
-        		.setFetchMode("loc", FetchMode.JOIN);   
+        		.setFetchMode("loc", FetchMode.JOIN)
+        		.createAlias("crs", "c");   
         if(!name.equals("")){
-        	criteria.add(Restrictions.eq("crs.code", name));
+        	//criteria.add(Restrictions.eq("c.code", name));
+        	criteria.add(Restrictions.like("c.title", "%" + name + "%"));
         }
         if(newDate != null){
         	criteria.add(Restrictions.eq("start", newDate));
         }
         if(!location.equals("0")){
-        	criteria.add(Restrictions.eq("loc.id", Integer.parseInt(location)));
+        	criteria.add(Restrictions.eq("id", Integer.parseInt(location)));
         }      
         List<CourseSession> coursesessions = criteria.list();
              
