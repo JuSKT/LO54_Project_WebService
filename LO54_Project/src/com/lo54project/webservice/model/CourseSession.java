@@ -148,6 +148,7 @@ public class CourseSession {
 	 * 
 	 * @return crs
 	 */
+	@XmlTransient
 	public Course getCrs() {
 		return crs;
 	}

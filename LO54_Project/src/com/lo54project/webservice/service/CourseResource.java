@@ -1,9 +1,15 @@
 package com.lo54project.webservice.service;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -16,7 +22,9 @@ import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.JAXBElement;
 
 import com.lo54project.webservice.dao.CourseDao;
+import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.Course;
+import com.lo54project.webservice.model.CourseSession;
 
 /** Class which will map the resource to the URL courses */
 @Path("/courses")
@@ -74,6 +82,20 @@ public class CourseResource
 		return String.valueOf(count);
 	}
 	  
+	/** Return the list of course/course_sessions filtred
+	 */
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/filter")
+	public List<Course> getCourseCourseSessionFiltered(@FormParam("name") String name, @FormParam("date") String date ,@FormParam("location") String location, @Context HttpServletResponse servletResponse) throws SQLException, ParseException 
+	{
+		List<Course> courses = new ArrayList<Course>();
+	    courses.addAll(CourseDao.instance.getCourseCourseSessionFiltered(name, date, location).values());
+	    return courses; 
+	}
+	
+	
 	/** Put a course into response and return it 
 	 * 
 	 * @param course

@@ -53,7 +53,6 @@ public enum CourseSessionDao implements DaoInterface {
 		
 		cd = (CourseSession) session.createCriteria(CourseSession.class)
 				.add(Restrictions.idEq(id_course_session))
-				.setFetchMode("crs", FetchMode.JOIN)
 				.setFetchMode("loc", FetchMode.JOIN)
 				.uniqueResult();
 

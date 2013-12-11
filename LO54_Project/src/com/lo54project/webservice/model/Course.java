@@ -93,7 +93,6 @@ public class Course {
 	 * 
 	 * @return courseSessions
 	 */
-	@XmlTransient
 	public List<CourseSession> getCourseSessions() {
 		return courseSessions;
 	}

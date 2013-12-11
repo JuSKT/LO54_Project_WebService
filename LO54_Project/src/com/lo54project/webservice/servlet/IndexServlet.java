@@ -63,32 +63,6 @@ public class IndexServlet extends HttpServlet {
 	protected void doProcess(HttpServletRequest request,HttpServletResponse response,String forwardTo) 
 			throws ServletException, IOException {
 		request.setAttribute("locations", LocationHandler.parseLocations());
-
-		try {
-			request.setAttribute("coursesessions",
-					CourseSessionHandler.parseCourseSessions());
-			
-			//Example -----------------------------------------------------------------------------
-			List<CourseSession> listCourseSessions = CourseSessionHandler.parseCourseSessions();
-			List<Course> listCourse = new ArrayList<Course>();
-			for (CourseSession crss : listCourseSessions) {
-				crss.getCrs().getCourseSessions().add(crss);
-			}
-			for (CourseSession courseSession : listCourseSessions) {
-				if(!listCourse.contains(courseSession.getCrs())){
-					listCourse.add(courseSession.getCrs());
-				}
-			}
-			//Example -----------------------------------------------------------------------------
-			
-		} catch (UniformInterfaceException e1) {
-			e1.printStackTrace();
-		} catch (ClientHandlerException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-
 		try {
 			request.setAttribute("courses", CourseHandler.parseCourses());
 		} catch (UniformInterfaceException e) {

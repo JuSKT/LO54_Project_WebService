@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form action="./rest/coursesessions/filter" method="post" id="filtersForm">
+<form action="./rest/courses/filter" method="post" id="filtersForm">
 	<table style="width: 990px;">
 		<tr>
 			<td style="width: 320px;">
-				Filter by <b>words</b> : <input style="width:190px;" id="filterByWords" type="text" name="name" placeholder="Type words .."/>
+				Filter by <b>words</b> : <input style="width:190px;" id="filterByWords" type="text" name="name" placeholder="Type words .." autocomplete="off"/>
 			</td>
 			
 			<td style="width: 10px;text-align:center;">|</td>
 			
 			<td style="width: 320px;">
-				By <b>date</b> : <input type="text" style="width:242px;" name="date" id="filterByDate" placeholder="Select a date .."/>
+				By <b>date</b> : <input type="text" style="width:242px;" name="date" id="filterByDate" placeholder="Select a date .." autocomplete="off"/>
 			</td>
 			
 			<td style="width: 10px;text-align:center;">|</td>

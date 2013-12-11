@@ -6,7 +6,7 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="./static/js/jquery.cookie.js"></script>
 <script>
-
+var words="";
 function global(){
 ///////// Jquery for design ///////////////
 
@@ -30,7 +30,10 @@ function global(){
 	$(function() 
 	{
 		$("#filterByWords").keyup(function(){
-			filterCourseSessions();
+			if($(this).val()!=words){
+				words=$(this).val();
+				filterCourseSessions();
+			}
 		});
 	});
 	
@@ -62,15 +65,81 @@ function global(){
 		});
 	});
 	
+	
+	
 	function filterCourseSessions(){
 		var form = $("#filtersForm").serialize();
-		alert($("#filtersForm").attr("action")+"  "+form)
-		$.post($("#filtersForm").attr("action"),form,function(data){			
-				alert(data);
+		$( "#accordion" ).html("<img src='./static/images/ajax-loader.gif' alt='Loading' height='100' width='100'>");
+		$.post($("#filtersForm").attr("action"),form,function(data){	
+				var html="<div id='accordion'>";
+				if(data){
+					var cs = data.course;
+					if(typeof(cs.length) === "undefined"){
+						html+="<h3>"+cs.code+" - "+cs.title+"</h3>";
+						html+="<div><ul>";
+						if(typeof(cs.courseSessions.length) === "undefined"){
+							html+=getLiCS(cs.courseSessions.start,cs.courseSessions.end,cs.courseSessions.loc.city,val.cs.courseSessions.id);
+							 
+						}
+						else{
+							jQuery.each(cs.courseSessions, function(i, val) {
+								html+=getLiCS(val.start,val.end,val.loc.city,val.id);
+								 
+							});
+						}
+						html+="</ul></div>";
+					}
+					else{
+						jQuery.each(cs, function(i, val) {
+							html+="<h3>"+val.code+" - "+val.title+"</h3>";
+							html+="<div><ul>";
+							if(typeof(val.courseSessions.length) === "undefined"){
+								html+=getLiCS(val.courseSessions.start,val.courseSessions.end,val.courseSessions.loc.city,val.courseSessions.id);
+							}
+							else{
+								jQuery.each(val.courseSessions, function(y, v) {
+									html+=getLiCS(v.start,v.end,v.loc.city,v.id);
+									 
+								});
+							}
+							html+="</ul></div>";
+						});
+					}
+				}
+				html+="</div>";
+				$("#accordion").remove();
+				$("#main").append(html);
+				$("#accordion").accordion();
+				global();
 		}).fail(function(){
 			alert("Problem on Server, Can you,please, try again ?");
 		});
 	};
+	
+	function getLiCS(start,end,city,id){
+		var d=start.substring(8,10);
+		var m=start.substring(5,7);
+		var y=start.substring(0,4);
+		var h=start.substring(11,13);
+		var min=start.substring(14,16);
+		
+		var html="<li>"
+		+m+"/"+d+"/"+y+" at "+h+":"+min
+		+" to ";
+		d=end.substring(8,10);
+		m=end.substring(5,7);
+		y=end.substring(0,4);
+		h=end.substring(11,13);
+		min=end.substring(14,16);
+		html+=m+"/"+d+"/"+y+" at "+h+":"+min
+		+" in "
+		+"<b>"+city+"</b>"
+		+"<input type='checkbox' class='coursesessions' name='coursesessions' value='"+id+"'>"
+		+"</li>";
+		
+		
+		return html;
+	}
 
 ///////// End Jquery for Filter ///////////////
 
