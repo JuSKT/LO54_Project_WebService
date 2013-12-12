@@ -78,7 +78,7 @@ function global(){
 						html+="<h3>"+cs.code+" - "+cs.title+"</h3>";
 						html+="<div><ul>";
 						if(typeof(cs.courseSessions.length) === "undefined"){
-							html+=getLiCS(cs.courseSessions.start,cs.courseSessions.end,cs.courseSessions.loc.city,val.cs.courseSessions.id);
+							html+=getLiCS(cs.courseSessions.start,cs.courseSessions.end,cs.courseSessions.loc.city,cs.courseSessions.id);
 							 
 						}
 						else{

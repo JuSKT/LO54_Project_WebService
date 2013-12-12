@@ -30,6 +30,7 @@ public class Course {
 	@Column(name = "title", nullable = false, length = 45)
 	private String title;
 	
+	//eager cause we always need to get sessions for courses
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="crs")
 	private List<CourseSession> courseSessions;
 

@@ -12,9 +12,11 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
@@ -33,6 +35,7 @@ instance;
         List<Course> courses = session.createCriteria(Course.class)
         		.setFetchMode("courseSessions", FetchMode.JOIN)
 				.setFetchMode("courseSessions.loc", FetchMode.JOIN)
+				.addOrder(Order.asc("code"))
 				.list();
         
         for (Course c : courses) {
@@ -78,34 +81,34 @@ instance;
         }
         
         Criteria criteria = session.createCriteria(Course.class)
-        						   .setFetchMode("courseSessions", FetchMode.JOIN)
+        					       .setFetchMode("courseSessions", FetchMode.JOIN)
         						   .setFetchMode("courseSessions.loc", FetchMode.JOIN);
         						   
         if(!name.equals("")){
-        	//criteria.add(Restrictions.eq("c.code", name));
         	criteria.add(Restrictions.like("title", "%" + name + "%"));
         }
         if(newDate != null){
-        	System.out.println(new java.sql.Date(newDate.getTime()));
-        	criteria.createAlias("courseSessions", "cs",Criteria.INNER_JOIN);
+        	System.out.println(newDate);
+        	//criteria.createAlias("courseSessions", "css");
         	
         	Calendar c = Calendar.getInstance(); 
         	c.setTime(newDate); 
         	c.add(Calendar.DATE, 1);
-        	newDate = c.getTime();  
+        	
 
-        	System.out.println(newDate);
-        	criteria.add(Restrictions.between("cs.start", new java.sql.Date(newDate.getTime()),new java.sql.Date(c.getTime().getTime())));
-        	//criteria.add(Restrictions.lt("cSession.start", newDate));
+        	System.out.println(c.getTime());
+        	//criteria.add(Restrictions.between("cs.start", new java.sql.Date(newDate.getTime()),new java.sql.Date(c.getTime().getTime())));
+        	criteria.add(Restrictions.sqlRestriction("DATE_FORMAT(start,'%m/%d/%Y') = ?", date, Hibernate.STRING));
+        	
         }
         if(!location.equals("0")){
-        	criteria.createAlias("courseSessions.loc", "loc",Criteria.INNER_JOIN)
-        			.add(Restrictions.eq("loc.id", Integer.parseInt(location)));
+        	criteria.createAlias("courseSessions.loc", "loc");
+        	criteria.add(Restrictions.eq("loc.id", Integer.parseInt(location)));
         }      
 
-        List<Course> courses = criteria.list();
-        System.out.println(courses.size());
+        List<Course> courses = criteria.addOrder(Order.asc("code")).list();
     
+        System.out.println(courses.size());
 		for (Course c : courses) {
         	contentProvider.put(c.getCode(), c);
 		}        
