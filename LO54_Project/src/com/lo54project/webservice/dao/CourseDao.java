@@ -3,7 +3,6 @@ package com.lo54project.webservice.dao;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,12 +11,11 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StandardBasicTypes;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Course;
@@ -98,7 +96,7 @@ instance;
 
         	System.out.println(c.getTime());
         	//criteria.add(Restrictions.between("cs.start", new java.sql.Date(newDate.getTime()),new java.sql.Date(c.getTime().getTime())));
-        	criteria.add(Restrictions.sqlRestriction("DATE_FORMAT(start,'%m/%d/%Y') = ?", date, Hibernate.STRING));
+        	criteria.add(Restrictions.sqlRestriction("DATE_FORMAT(start,'%m/%d/%Y') = ?", date, StandardBasicTypes.STRING));
         	
         }
         if(!location.equals("0")){

@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Client;
-import com.lo54project.webservice.model.CourseSession;
 
 public enum ClientDao implements DaoInterface {
 	instance;

@@ -6,24 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lo54project.webservice.model.Course;
-import com.lo54project.webservice.model.CourseSession;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class CourseHandler extends Handler {
         
+		public CourseHandler(String url) {
+			super(url);
+		}
         
-        public static List<Course> parseCourses() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+        public  List<Course> parseCourses() throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
                 
                 List<Course> course = new ArrayList<Course>();
                 JsonNode rootNode = mapper.readTree(service.path("rest").path("courses").accept(MediaType.APPLICATION_JSON).get(String.class));
@@ -40,7 +38,7 @@ public class CourseHandler extends Handler {
                 return course;
         }
         
-        public static Course parseCourseById(String id) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
+        public  Course parseCourseById(String id) throws JsonProcessingException, UniformInterfaceException, ClientHandlerException, IOException, ParseException{
             
             Course course = new Course();
             

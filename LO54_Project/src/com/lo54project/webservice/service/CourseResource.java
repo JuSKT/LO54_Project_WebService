@@ -22,9 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.JAXBElement;
 
 import com.lo54project.webservice.dao.CourseDao;
-import com.lo54project.webservice.dao.CourseSessionDao;
 import com.lo54project.webservice.model.Course;
-import com.lo54project.webservice.model.CourseSession;
 
 /** Class which will map the resource to the URL courses */
 @Path("/courses")

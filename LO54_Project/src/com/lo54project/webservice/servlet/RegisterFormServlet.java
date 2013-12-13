@@ -10,12 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lo54project.webservice.handler.CourseSessionHandler;
-import com.lo54project.webservice.handler.Handler;
+
 
 /**
  * Servlet implementation class RegisterFormServlet
@@ -36,6 +33,8 @@ public class RegisterFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String s=null;
+		String url= "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		CourseSessionHandler csh = new CourseSessionHandler(url);
 		for (Cookie c : request.getCookies()){
 			if(c.getName().equals("courseSessionsList")){
 				s=URLDecoder.decode(c.getValue(), "UTF-8");
@@ -46,7 +45,7 @@ public class RegisterFormServlet extends HttpServlet {
 		s=s.replace('"',' ');
 		
 		ObjectMapper mapper = new ObjectMapper();
-		request.setAttribute("courseSessions", CourseSessionHandler.parseCourseSessionsById(mapper.readValue(s,int[].class)));
+		request.setAttribute("courseSessions", csh.parseCourseSessionsById(mapper.readValue(s,int[].class)));
 
 		getServletContext().getRequestDispatcher("/registerForm.jsp").forward(request,response);
 	}

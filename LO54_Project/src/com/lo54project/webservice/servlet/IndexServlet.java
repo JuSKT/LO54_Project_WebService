@@ -2,31 +2,18 @@ package com.lo54project.webservice.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import com.lo54project.webservice.handler.CourseHandler;
-import com.lo54project.webservice.handler.CourseSessionHandler;
 import com.lo54project.webservice.handler.LocationHandler;
-import com.lo54project.webservice.hibernate.util.HibernateUtil;
-import com.lo54project.webservice.model.Client;
-import com.lo54project.webservice.model.Course;
-import com.lo54project.webservice.model.CourseSession;
-import com.lo54project.webservice.model.Location;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 
 /** Servlet implementation class IndexServlet */
-@SuppressWarnings("unused")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -62,9 +49,13 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doProcess(HttpServletRequest request,HttpServletResponse response,String forwardTo) 
 			throws ServletException, IOException {
-		request.setAttribute("locations", LocationHandler.parseLocations());
+		String url= "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		LocationHandler lh = new LocationHandler(url);
+		CourseHandler ch = new CourseHandler(url);
+		
+		request.setAttribute("locations", lh.parseLocations());
 		try {
-			request.setAttribute("courses", CourseHandler.parseCourses());
+			request.setAttribute("courses", ch.parseCourses());
 		} catch (UniformInterfaceException e) {
 			e.printStackTrace();
 		} catch (ClientHandlerException e) {
