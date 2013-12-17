@@ -59,7 +59,8 @@ public enum ClientDao implements DaoInterface {
         Session session = sf.openSession();
         session.beginTransaction();
         
-        session.persist(((Client) cli));
+//        session.persist(((Client) cli));
+        session.save(((Client) cli));
         contentProvider.put(((Client)cli).getId(), (Client) cli);
         
         session.getTransaction().commit();
