@@ -25,22 +25,8 @@ instance;
 	
 	private Map<String, Course> contentProvider = new HashMap<String, Course>();
 	
-	@SuppressWarnings("unchecked")
 	private CourseDao(){	
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-
-        List<Course> courses = session.createCriteria(Course.class)
-        		.setFetchMode("courseSessions", FetchMode.JOIN)
-				.setFetchMode("courseSessions.loc", FetchMode.JOIN)
-				.addOrder(Order.asc("code"))
-				.list();
-        
-        for (Course c : courses) {
-        	contentProvider.put(c.getCode(), c);
-		}
-        
-        session.close();
+		
 	}
 	
 	public Course getCourse(String course_code) {
@@ -48,8 +34,6 @@ instance;
 		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
-        
-//		c = (Course) session.get(Course.class, course_code);
 		
 		c = (Course) session.createCriteria(Course.class)
 				.add(Restrictions.idEq(course_code))
@@ -115,6 +99,7 @@ instance;
 	}
 	
 	public Map<String, Course> getModel(){
+		loadModel();
 		return contentProvider;
 	}
 
@@ -134,5 +119,24 @@ instance;
 	public <T> void update(T o) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void loadModel() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+
+        List<Course> courses = session.createCriteria(Course.class)
+        		.setFetchMode("courseSessions", FetchMode.JOIN)
+				.setFetchMode("courseSessions.loc", FetchMode.JOIN)
+				.addOrder(Order.asc("code"))
+				.list();
+        
+        for (Course c : courses) {
+        	contentProvider.put(c.getCode(), c);
+		}
+        
+        session.close();
 	}
 }

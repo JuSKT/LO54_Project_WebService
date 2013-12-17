@@ -24,22 +24,8 @@ public enum CourseSessionDao implements DaoInterface {
 
 	private Map<Integer, CourseSession> contentProvider = new HashMap<Integer, CourseSession>();
 
-	@SuppressWarnings("unchecked")
 	private CourseSessionDao() {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-
-		List<CourseSession> coursesessions = new ArrayList<CourseSession>();
-		coursesessions = session.createCriteria(CourseSession.class)
-				.setFetchMode("crs", FetchMode.JOIN)
-				.setFetchMode("loc", FetchMode.JOIN)
-				.list();
-
-		for (CourseSession cs : coursesessions) {
-			contentProvider.put(cs.getId(), cs);
-		}
-
-		session.close();
+		
 	}
 
 	public CourseSession getCourseSession(Integer id_course_session)
@@ -153,6 +139,7 @@ public enum CourseSessionDao implements DaoInterface {
 	}
 
 	public Map<Integer, CourseSession> getModel() {
+		loadModel();
 		return contentProvider;
 	}
 
@@ -172,5 +159,24 @@ public enum CourseSessionDao implements DaoInterface {
 	public <T> void update(T o) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void loadModel() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+
+		List<CourseSession> coursesessions = new ArrayList<CourseSession>();
+		coursesessions = session.createCriteria(CourseSession.class)
+				.setFetchMode("crs", FetchMode.JOIN)
+				.setFetchMode("loc", FetchMode.JOIN)
+				.list();
+
+		for (CourseSession cs : coursesessions) {
+			contentProvider.put(cs.getId(), cs);
+		}
+
+		session.close();
 	}
 }

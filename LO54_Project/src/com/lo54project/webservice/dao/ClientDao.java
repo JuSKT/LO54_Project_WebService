@@ -17,26 +17,12 @@ public enum ClientDao implements DaoInterface {
 	
 	private Map<Integer, Client> contentProvider = new HashMap<Integer, Client>();
 	
-	@SuppressWarnings("unchecked")
 	private ClientDao(){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-
-        List<Client> clients = new ArrayList<Client>();
-        clients = session.createCriteria(Client.class)
-        		.setFetchMode("crss", FetchMode.JOIN)
-        		.setFetchMode("crss.crs", FetchMode.JOIN)
-        		.setFetchMode("crss.loc", FetchMode.JOIN)
-        		.list();
-        
-        for (Client c : clients) {
-        	contentProvider.put(c.getId(), c);
-		}
-        
-        session.close();
+		
 	}
 	
 	public Map<Integer, Client> getModel(){
+		loadModel();
 		return contentProvider;
 	}
 
@@ -63,6 +49,26 @@ public enum ClientDao implements DaoInterface {
 	public <T> void update(T o) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void loadModel() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+
+        List<Client> clients = new ArrayList<Client>();
+        clients = session.createCriteria(Client.class)
+        		.setFetchMode("crss", FetchMode.JOIN)
+        		.setFetchMode("crss.crs", FetchMode.JOIN)
+        		.setFetchMode("crss.loc", FetchMode.JOIN)
+        		.list();
+        
+        for (Client c : clients) {
+        	contentProvider.put(c.getId(), c);
+		}
+        
+        session.close();
 	}
 	
 	

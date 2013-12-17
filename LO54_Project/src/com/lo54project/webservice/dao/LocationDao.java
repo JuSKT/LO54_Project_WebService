@@ -16,19 +16,8 @@ public enum LocationDao implements DaoInterface {
 	
 	private Map<Integer, Location> contentProvider = new HashMap<Integer, Location>();
 	
-	@SuppressWarnings("unchecked")
 	private LocationDao(){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-
-        List<Location> locations = new ArrayList<Location>();
-        locations = session.createCriteria(Location.class).list();
-        
-        for (Location l : locations) {
-        	contentProvider.put(l.getId(), l);
-		}
-        
-        session.close();
+		
 	}
 
 	public Location getLocation(int location_id) {
@@ -44,6 +33,7 @@ public enum LocationDao implements DaoInterface {
 	}
 	
 	public Map<Integer, Location> getModel(){
+		loadModel();
 		return contentProvider;
 	}
 
@@ -63,5 +53,21 @@ public enum LocationDao implements DaoInterface {
 	public <T> void update(T o) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void loadModel() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+
+        List<Location> locations = new ArrayList<Location>();
+        locations = session.createCriteria(Location.class).list();
+        
+        for (Location l : locations) {
+        	contentProvider.put(l.getId(), l);
+		}
+        
+        session.close();
 	}
 }
