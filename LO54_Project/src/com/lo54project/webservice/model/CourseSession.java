@@ -1,10 +1,7 @@
 package com.lo54project.webservice.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,14 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 /** Class which manage session courses */
 @XmlRootElement
@@ -40,13 +34,6 @@ public class CourseSession {
 	@Column(name = "end", nullable = false)
 	private Date end;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "course_code", nullable = false)
-	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//  @JoinColumn(name="course_code", 
-//                insertable=false, updatable=false, 
-//                nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
 	private Course crs;
@@ -148,6 +135,7 @@ public class CourseSession {
 	 * 
 	 * @return crs
 	 */
+	@XmlTransient
 	public Course getCrs() {
 		return crs;
 	}

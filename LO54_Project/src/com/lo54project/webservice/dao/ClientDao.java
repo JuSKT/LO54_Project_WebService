@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
 import com.lo54project.webservice.model.Client;
-import com.lo54project.webservice.model.CourseSession;
 
 public enum ClientDao implements DaoInterface {
 	instance;
@@ -36,18 +35,6 @@ public enum ClientDao implements DaoInterface {
         
         session.close();
 	}
-
-//	public void createClientAndSetCourseSession(Client cli) {
-//		SessionFactory sf = HibernateUtil.getSessionFactory();
-//        Session session = sf.openSession();
-//        session.beginTransaction();
-//        
-//        session.persist(cli); //pas besoin de .save(), hibernate le fait dans le getId
-//        contentProvider.put(cli.getId(), cli);
-//        
-//        session.getTransaction().commit();
-//        session.close();
-//	}
 	
 	public Map<Integer, Client> getModel(){
 		return contentProvider;
@@ -59,7 +46,6 @@ public enum ClientDao implements DaoInterface {
         Session session = sf.openSession();
         session.beginTransaction();
         
-//        session.persist(((Client) cli));
         session.save(((Client) cli));
         contentProvider.put(((Client)cli).getId(), (Client) cli);
         

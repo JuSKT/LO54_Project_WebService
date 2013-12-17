@@ -17,7 +17,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.lo54project.webservice.hibernate.util.HibernateUtil;
-import com.lo54project.webservice.model.Course;
 import com.lo54project.webservice.model.CourseSession;
 
 public enum CourseSessionDao implements DaoInterface {
@@ -53,7 +52,6 @@ public enum CourseSessionDao implements DaoInterface {
 		
 		cd = (CourseSession) session.createCriteria(CourseSession.class)
 				.add(Restrictions.idEq(id_course_session))
-				.setFetchMode("crs", FetchMode.JOIN)
 				.setFetchMode("loc", FetchMode.JOIN)
 				.uniqueResult();
 

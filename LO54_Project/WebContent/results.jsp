@@ -6,8 +6,7 @@
 	<h3>${course.code} - ${course.title}</h3>
 	<div>
 		<ul>
-			<c:forEach var="cs" items="${requestScope.coursesessions}">
-				<c:if test="${cs.crs.code==course.code}">
+			<c:forEach var="cs" items="${course.courseSessions}">
 					<li>
 						<fmt:formatDate pattern="MM/dd/yyyy 'at' HH:mm" value="${cs.start}" />
 						to
@@ -16,7 +15,6 @@
 						<b>${cs.loc.city}</b>
 						<input type="checkbox" class="coursesessions" name="coursesessions" value="${cs.id}">
 					</li>
-				</c:if>
 			</c:forEach>
 		</ul>
 	</div>

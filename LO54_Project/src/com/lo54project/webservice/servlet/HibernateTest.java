@@ -30,7 +30,6 @@ public class HibernateTest extends HttpServlet {
      */
     public HibernateTest() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
