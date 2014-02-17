@@ -1,6 +1,6 @@
 LO54_Project_WebService
 =======================
 
-This is an LO54 Project on WebService REST - JSON - JAX-RS
+This is an LO54 Project on WebService REST - JSON - JAX-RS including hibernate.
 
-To be continued later...
+UTBM A2013
